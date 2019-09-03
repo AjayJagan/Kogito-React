@@ -17,6 +17,7 @@ export default class BaseLayout extends React.Component<IOwnProps, IStateProps> 
             </Switch>
           </BrowserRouter>
         </LoginPage>
+        {/* <Dashboard /> */}
       </div>
     );
   }

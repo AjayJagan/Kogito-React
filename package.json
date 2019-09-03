@@ -23,6 +23,10 @@
     "react-router-dom": "^5.0.1"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.2",
+    "@fortawesome/fontawesome-svg-core": "^1.2.22",
+    "@fortawesome/free-solid-svg-icons": "^5.10.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "@types/react-dom": "^16.9.0",
     "@types/react-router-dom": "^4.3.5",
     "@types/webpack": "^4.39.1",

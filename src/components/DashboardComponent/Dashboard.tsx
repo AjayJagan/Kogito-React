@@ -35,7 +35,7 @@ import accessibleStyles from '@patternfly/react-styles/css/utilities/Accessibili
 import spacingStyles from '@patternfly/react-styles/css/utilities/Spacing/spacing';
 import { css } from '@patternfly/react-styles';
 import { BellIcon, CogIcon } from '@patternfly/react-icons';
-
+import AboutModalBox from '../AboutModalComponent/AboutModal';
 export interface IOwnProps {}
 export interface IStateProps {
   isDropdownOpen: boolean;
@@ -84,25 +84,15 @@ class Dashboard extends React.Component<IOwnProps, IStateProps> {
 
   render() {
     const { isDropdownOpen, isKebabDropdownOpen, activeItem } = this.state;
-
+    const navItems = ['Services', 'Policy', 'Authentication', 'Network Services', 'Server'];
     const PageNav = (
       <Nav onSelect={this.onNavSelect} aria-label="Nav">
         <NavList>
-          <NavItem itemId={0} isActive={activeItem === 0}>
-            System Panel
-          </NavItem>
-          <NavItem itemId={1} isActive={activeItem === 1}>
-            Policy
-          </NavItem>
-          <NavItem itemId={2} isActive={activeItem === 2}>
-            Authentication
-          </NavItem>
-          <NavItem itemId={3} isActive={activeItem === 3}>
-            Network Services
-          </NavItem>
-          <NavItem itemId={4} isActive={activeItem === 4}>
-            Server
-          </NavItem>
+          {navItems.map((navItem, index) => (
+            <NavItem itemId={index} isActive={activeItem === index}>
+              {navItem}
+            </NavItem>
+          ))}
         </NavList>
       </Nav>
     );
@@ -115,15 +105,13 @@ class Dashboard extends React.Component<IOwnProps, IStateProps> {
       </DropdownItem>
     ];
     const userDropdownItems = [
-      <DropdownItem>Link</DropdownItem>,
-      <DropdownItem component="button">Action</DropdownItem>,
-      <DropdownItem isDisabled>Disabled Link</DropdownItem>,
-      <DropdownItem isDisabled component="button">
-        Disabled Action
+      <DropdownItem component={AboutModalBox} key={1}>
+        About
       </DropdownItem>,
       <DropdownSeparator />,
-      <DropdownItem>Separated Link</DropdownItem>,
-      <DropdownItem component="button">Separated Action</DropdownItem>
+      <DropdownItem component="button" key={2}>
+        Log out
+      </DropdownItem>
     ];
     const PageToolbar = (
       <Toolbar>
@@ -156,19 +144,19 @@ class Dashboard extends React.Component<IOwnProps, IStateProps> {
               position="right"
               onSelect={this.onDropdownSelect}
               isOpen={isDropdownOpen}
-              toggle={<DropdownToggle onToggle={this.onDropdownToggle}>Kyle Baker</DropdownToggle>}
+              toggle={<DropdownToggle onToggle={this.onDropdownToggle}>User</DropdownToggle>}
               dropdownItems={userDropdownItems}
             />
           </ToolbarItem>
         </ToolbarGroup>
       </Toolbar>
     );
-
+    const brand = <Brand src={require('../../static/kogito_logo_rgb.png')} alt="Kogito Logo"></Brand>;
     const Header = (
       <PageHeader
-        //logo={<Brand src={imgBrand} alt="Patternfly Logo" />}
+        logo={brand}
         toolbar={PageToolbar}
-        // avatar={<Avatar src={imgAvatar} alt="Avatar image" />}
+        avatar={<Avatar src={require('../../static/user.png')} alt="Avatar image" />}
         showNavToggle
       />
     );
