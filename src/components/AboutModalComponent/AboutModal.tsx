@@ -1,5 +1,6 @@
 import React from 'react';
 import { AboutModal, Button, TextContent, TextList, TextListItem } from '@patternfly/react-core';
+import './AboutModal.css';
 export interface IOwnProps {}
 
 export interface IStateprops {
