@@ -10,14 +10,14 @@ export default class BaseLayout extends React.Component<IOwnProps, IStateProps> 
   render() {
     return (
       <div>
-        {/* <LoginPage>
+        <LoginPage>
           <BrowserRouter>
             <Switch>
               <Route path="/" component={Dashboard} />
             </Switch>
           </BrowserRouter>
-        </LoginPage> */}
-        <Dashboard />
+        </LoginPage>
+        {/* <Dashboard /> */}
       </div>
     );
   }
