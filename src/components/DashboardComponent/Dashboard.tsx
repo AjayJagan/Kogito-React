@@ -43,6 +43,7 @@ export interface IStateProps {
   isDropdownOpen: boolean;
   isKebabDropdownOpen: boolean;
   activeItem: number;
+  instanceType: string;
 }
 interface IinstanceDetails {
   ACTIVE: string;
@@ -56,7 +57,8 @@ class Dashboard extends React.Component<IOwnProps, IStateProps> {
     this.state = {
       isDropdownOpen: false,
       isKebabDropdownOpen: false,
-      activeItem: 0
+      activeItem: 0,
+      instanceType: ''
     };
   }
 
@@ -88,6 +90,11 @@ class Dashboard extends React.Component<IOwnProps, IStateProps> {
     this.setState({
       activeItem: result.itemId
     });
+  };
+
+  onCardClick = detail => event => {
+    console.log(this.state.instanceType);
+    this.setState({ instanceType: detail });
   };
 
   render() {
@@ -204,7 +211,7 @@ class Dashboard extends React.Component<IOwnProps, IStateProps> {
             <Gallery gutter="md">
               {Object.keys(instanceDetail).map((detail, index) => (
                 <GalleryItem key={index}>
-                  <Card>
+                  <Card isHoverable onClick={this.onCardClick(detail)}>
                     <CardBody>{detail}</CardBody>
                     <CardBody>{instanceDetail[detail]}</CardBody>
                   </Card>
@@ -219,7 +226,7 @@ class Dashboard extends React.Component<IOwnProps, IStateProps> {
             </TextContent>
           </PageSection>
           <PageSection>
-            <Table></Table>
+            <Table instanceType={this.state.instanceType}></Table>
           </PageSection>
         </Page>
       </React.Fragment>
