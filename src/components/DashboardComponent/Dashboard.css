@@ -1,6 +1,6 @@
 :root {
-  --pf-c-FontColor: black;
   --p-c-FontWeight: 400;
+  --p-c-backgroundColor: white;
 }
 .pf-c-button pf-m-primary {
   display: block;

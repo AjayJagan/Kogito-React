@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  LoginFooterItem,
-  LoginForm,
-  LoginMainFooterBandItem,
-  LoginPage,
-  ListItem,
-  BackgroundImageSrc
-} from '@patternfly/react-core';
+import { LoginForm, LoginMainFooterBandItem, LoginPage, BackgroundImageSrc } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import brandImage from '../../static/kogito_logo.png';
 import backgroundImage from '../../static/black_background.png';

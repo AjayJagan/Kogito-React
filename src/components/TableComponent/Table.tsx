@@ -1,16 +1,6 @@
 import React from 'react';
-import {
-  Table,
-  TableHeader,
-  TableBody,
-  sortable,
-  SortByDirection,
-  headerCol,
-  TableVariant,
-  expandable,
-  cellWidth
-} from '@patternfly/react-table';
-
+import { Link } from 'react-router-dom';
+import { Table, TableHeader, TableBody, sortable } from '@patternfly/react-table';
 export interface IOwnProps {
   instanceType: string;
 }
@@ -30,20 +20,50 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
     super(props);
     this.state = {
       columnsActive: [
-        { title: 'Service ID', transforms: [sortable] },
-        'Process ID',
+        { title: 'Process ID', transforms: [sortable] },
+        'Service ID',
         { title: 'Name', transforms: [sortable] },
         'Timer',
         'Services'
       ],
       rowsActive: [
-        ['12323', '10001', 'ABC', '11:20', '5'],
-        ['12324', '10002', 'DEF', '10:10', '1'],
-        ['12325', '10003', 'GHI', '01:15', '10']
+        {
+          cells: [
+            {
+              title: <Link to="/instanceDetail">12324</Link>
+            },
+            '10001',
+            'ABC',
+            '11:20',
+            '5'
+          ]
+        },
+        {
+          cells: [
+            {
+              title: <Link to="/instanceDetail">12325</Link>
+            },
+            '10002',
+            'DEF',
+            '10:10',
+            '1'
+          ]
+        },
+        {
+          cells: [
+            {
+              title: <Link to="/instanceDetail">12326</Link>
+            },
+            '10003',
+            'GHI',
+            '01:15',
+            '10'
+          ]
+        }
       ],
       columnsCompleted: [
-        { title: 'Service ID', transforms: [sortable] },
-        'Process ID',
+        { title: 'Process ID', transforms: [sortable] },
+        'Service ID',
         { title: 'Name', transforms: [sortable] },
         'Timer',
         'Services'
@@ -54,8 +74,8 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         ['33333', '66666', 'PQR', '21:25', '6']
       ],
       columnsAborted: [
-        { title: 'Service ID', transforms: [sortable] },
-        'Process ID',
+        { title: 'Process ID', transforms: [sortable] },
+        'Service ID',
         { title: 'Name', transforms: [sortable] },
         'Timer',
         'Services'
@@ -66,8 +86,8 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         ['66666', '32423', 'YZA', '22:22', '12']
       ],
       columnsInError: [
-        { title: 'Service ID', transforms: [sortable] },
-        'Process ID',
+        { title: 'Process ID', transforms: [sortable] },
+        'Service ID',
         { title: 'Name', transforms: [sortable] },
         'Timer',
         'Services'
@@ -79,20 +99,7 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
       ],
       sortBy: {}
     };
-    // this.onSort = this.onSort.bind(this);
   }
-
-  // onSort(_event, index, direction) {
-  //   const sortedRows = this.state.rows.sort((a, b) => (a[index] < b[index] ? -1 : a[index] > b[index] ? 1 : 0));
-  //   this.setState({
-  //     sortBy: {
-  //       index,
-  //       direction
-  //     },
-  //     rows: direction === SortByDirection.asc ? sortedRows : sortedRows.reverse()
-  //   });
-  // }
-
   render() {
     const {
       columnsActive,

@@ -31,25 +31,21 @@ import {
   ToolbarItem
 } from '@patternfly/react-core';
 // make sure you've installed @patternfly/patternfly
+import { Route } from 'react-router-dom';
 import accessibleStyles from '@patternfly/react-styles/css/utilities/Accessibility/accessibility';
 import spacingStyles from '@patternfly/react-styles/css/utilities/Spacing/spacing';
 import { css } from '@patternfly/react-styles';
 import { BellIcon, CogIcon } from '@patternfly/react-icons';
 import AboutModalBox from '../AboutModalComponent/AboutModal';
+import Overview from '../OverviewComponent/OverviewComponent';
 import './Dashboard.css';
-import Table from '../TableComponent/Table';
+import InstanceDetailPage from '../InstanceDetails/InstanceDetailComponent';
 export interface IOwnProps {}
 export interface IStateProps {
   isDropdownOpen: boolean;
   isKebabDropdownOpen: boolean;
   activeItem: number;
   instanceType: string;
-}
-interface IinstanceDetails {
-  ACTIVE: string;
-  COMPLETED: string;
-  ABORTED: string;
-  INERROR: string;
 }
 class Dashboard extends React.Component<IOwnProps, IStateProps> {
   constructor(props) {
@@ -200,34 +196,10 @@ class Dashboard extends React.Component<IOwnProps, IStateProps> {
           skipToContent={PageSkipToContent}
           breadcrumb={PageBreadcrumb}
           mainContainerId={pageId}
+          className="page"
         >
-          <PageSection variant={PageSectionVariants.light}>
-            <TextContent>
-              <Text component="h1">Process Instances</Text>
-              <Text component="p"></Text>
-            </TextContent>
-          </PageSection>
-          <PageSection>
-            <Gallery gutter="md">
-              {Object.keys(instanceDetail).map((detail, index) => (
-                <GalleryItem key={index}>
-                  <Card isHoverable onClick={this.onCardClick(detail)}>
-                    <CardBody>{detail}</CardBody>
-                    <CardBody>{instanceDetail[detail]}</CardBody>
-                  </Card>
-                </GalleryItem>
-              ))}
-            </Gallery>
-          </PageSection>
-          <PageSection variant={PageSectionVariants.light} noPadding={true}>
-            <TextContent>
-              <Text component="h1">Instance Details</Text>
-              <Text component="p"></Text>
-            </TextContent>
-          </PageSection>
-          <PageSection>
-            <Table instanceType={this.state.instanceType}></Table>
-          </PageSection>
+          <Route exact path="/instanceDetail" component={InstanceDetailPage} />
+          <Route exact path="/" component={Overview} />
         </Page>
       </React.Fragment>
     );
