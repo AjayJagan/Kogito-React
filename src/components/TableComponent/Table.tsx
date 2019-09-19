@@ -69,9 +69,33 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         'Services'
       ],
       rowsCompleted: [
-        ['11111', '88888', 'JKL', '12:20', '2'],
-        ['22222', '77777', 'MNO', '15:50', '4'],
-        ['33333', '66666', 'PQR', '21:25', '6']
+        [
+          {
+            title: <Link to="/instanceDetail">11111</Link>
+          },
+          '88888',
+          'JKL',
+          '12:20',
+          '2'
+        ],
+        [
+          {
+            title: <Link to="/instanceDetail">22222</Link>
+          },
+          '77777',
+          'MNO',
+          '15:50',
+          '4'
+        ],
+        [
+          {
+            title: <Link to="/instanceDetail">33333</Link>
+          },
+          '66666',
+          'PQR',
+          '21:25',
+          '6'
+        ]
       ],
       columnsAborted: [
         { title: 'Process ID', transforms: [sortable] },
@@ -81,9 +105,33 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         'Services'
       ],
       rowsAborted: [
-        ['44444', '12345', 'STU', '19:40', '8'],
-        ['55555', '67891', 'VWX', '16:50', '10'],
-        ['66666', '32423', 'YZA', '22:22', '12']
+        [
+          {
+            title: <Link to="/instanceDetail">44444</Link>
+          },
+          '12345',
+          'STU',
+          '19:40',
+          '8'
+        ],
+        [
+          {
+            title: <Link to="/instanceDetail">55555</Link>
+          },
+          '67891',
+          'VWX',
+          '16:50',
+          '10'
+        ],
+        [
+          {
+            title: <Link to="/instanceDetail">66666</Link>
+          },
+          '32423',
+          'YZA',
+          '22:22',
+          '12'
+        ]
       ],
       columnsInError: [
         { title: 'Process ID', transforms: [sortable] },
@@ -93,9 +141,33 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         'Services'
       ],
       rowsInError: [
-        ['65432', '13213', 'AABBCC', '11:20', '5'],
-        ['56789', '34543543', 'DDEEFF', '10:10', '1'],
-        ['34521', '435435435', 'GGHHII', '01:15', '10']
+        [
+          {
+            title: <Link to="/instanceDetail">65432</Link>
+          },
+          '13213',
+          'AABBCC',
+          '11:20',
+          '5'
+        ],
+        [
+          {
+            title: <Link to="/instanceDetail">56789</Link>
+          },
+          '34543543',
+          'DDEEFF',
+          '10:10',
+          '1'
+        ],
+        [
+          {
+            title: <Link to="/instanceDetail">34521</Link>
+          },
+          '435435435',
+          'GGHHII',
+          '01:15',
+          '10'
+        ]
       ],
       sortBy: {}
     };

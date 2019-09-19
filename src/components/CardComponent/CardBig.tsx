@@ -6,13 +6,20 @@ import { Title, EmptyState, EmptyStateVariant, EmptyStateIcon, EmptyStateBody } 
 export interface IOwnProps {}
 export interface IStateProps {}
 export default class CardBig extends React.Component<IOwnProps, IStateProps> {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  handleOnClick = () => {
+    alert('tab');
+  };
   render() {
     return (
       <Card style={{ minHeight: '30em' }}>
         <CardHeader>
           <div className="pf-l-flex pf-m-justify-content-space-evenly pf-m-align-items-center pf-m-align-content-center">
             <TextContent>
-              <Text component={TextVariants.a} href="#">
+              <Text component={TextVariants.a} href="#" onClick={this.handleOnClick}>
                 Process Diagram
               </Text>
             </TextContent>
