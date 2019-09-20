@@ -1,8 +1,8 @@
 import React from 'react';
 import { LoginForm, LoginMainFooterBandItem, LoginPage, BackgroundImageSrc } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
-import brandImage from '../../static/kogito_logo.png';
-import backgroundImage from '../../static/black_background.png';
+const brandImage = require('../../static/kogito_logo.png');
+const backgroundImage = require('../../static/black_background.png');
 import './LoginPage.css';
 
 export interface IOwnProps {}
