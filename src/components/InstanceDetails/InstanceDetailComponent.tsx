@@ -1,17 +1,22 @@
 import React from 'react';
 import './InstanceDetail.css';
-import { PageSection, TextContent } from '@patternfly/react-core';
+import { PageSection, TextContent, Text, TextVariants } from '@patternfly/react-core';
 import { Grid, GridItem } from '@patternfly/react-core';
 import { WarningTriangleIcon, SyncIcon, UserIcon, CheckCircleIcon } from '@patternfly/react-icons';
 import Cards from '../CardComponent/Card';
 import CardsSmall from '../CardComponent/CardSmall';
 import CardsBig from '../CardComponent/CardBig';
 import CardsActivity from '../CardComponent/CardActivity';
-
-export interface IOwnProps {}
+import { RouteComponentProps } from 'react-router';
+export interface IOwnProps {
+  processInstanceID: string;
+}
 export interface IStateProps {}
-
-class InstanceDetail extends React.Component<IOwnProps, IStateProps> {
+export type combinedProps = IOwnProps & RouteComponentProps;
+class InstanceDetail extends React.Component<combinedProps & RouteComponentProps, IStateProps> {
+  constructor(props: IOwnProps & RouteComponentProps) {
+    super(props);
+  }
   render() {
     const activeTaskData = {
       Header: 'Active Task',
@@ -33,9 +38,15 @@ class InstanceDetail extends React.Component<IOwnProps, IStateProps> {
       'Definition Version': '1.0',
       Asignee: 'aperson'
     };
+    console.log(this.props);
     return (
       <React.Fragment>
         <PageSection>
+          <TextContent>
+            <Text component={TextVariants.h3}>
+              Process Instance ID : {this.props.match.params['processInstanceID']}
+            </Text>
+          </TextContent>
           <TextContent>
             <Grid gutter="md">
               <GridItem span={3} rowSpan={12}>

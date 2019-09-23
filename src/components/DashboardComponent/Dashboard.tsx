@@ -30,7 +30,7 @@ class Dashboard extends React.Component<IOwnProps, IStateProps> {
           mainContainerId={pageId}
           className="page"
         >
-          <Route exact path="/instanceDetail" component={InstanceDetailPage} />
+          <Route exact path="/instanceDetail/:processInstanceID" component={InstanceDetailPage} />
           <Route exact path="/" component={Overview} />
         </Page>
       </React.Fragment>

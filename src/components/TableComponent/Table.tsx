@@ -30,7 +30,7 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         {
           cells: [
             {
-              title: <Link to="/instanceDetail">12324</Link>
+              title: <Link to="/instanceDetail/12324">12324</Link>
             },
             '10001',
             'ABC',
@@ -41,7 +41,7 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         {
           cells: [
             {
-              title: <Link to="/instanceDetail">12325</Link>
+              title: <Link to="/instanceDetail/12325">12325</Link>
             },
             '10002',
             'DEF',
@@ -52,7 +52,7 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         {
           cells: [
             {
-              title: <Link to="/instanceDetail">12326</Link>
+              title: <Link to="/instanceDetail/12326">12326</Link>
             },
             '10003',
             'GHI',
@@ -71,7 +71,7 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
       rowsCompleted: [
         [
           {
-            title: <Link to="/instanceDetail">11111</Link>
+            title: <Link to="/instanceDetail/1111">1111</Link>
           },
           '88888',
           'JKL',
@@ -80,7 +80,7 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         ],
         [
           {
-            title: <Link to="/instanceDetail">22222</Link>
+            title: <Link to="/instanceDetail/22222">22222</Link>
           },
           '77777',
           'MNO',
@@ -89,7 +89,7 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         ],
         [
           {
-            title: <Link to="/instanceDetail">33333</Link>
+            title: <Link to="/instanceDetail/33333">33333</Link>
           },
           '66666',
           'PQR',
@@ -107,7 +107,7 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
       rowsAborted: [
         [
           {
-            title: <Link to="/instanceDetail">44444</Link>
+            title: <Link to="/instanceDetail/44444">44444</Link>
           },
           '12345',
           'STU',
@@ -116,7 +116,7 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         ],
         [
           {
-            title: <Link to="/instanceDetail">55555</Link>
+            title: <Link to="/instanceDetail/55555">55555</Link>
           },
           '67891',
           'VWX',
@@ -125,7 +125,7 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         ],
         [
           {
-            title: <Link to="/instanceDetail">66666</Link>
+            title: <Link to="/instanceDetail/66666">66666</Link>
           },
           '32423',
           'YZA',
@@ -143,7 +143,7 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
       rowsInError: [
         [
           {
-            title: <Link to="/instanceDetail">65432</Link>
+            title: <Link to="/instanceDetail/65432">65432</Link>
           },
           '13213',
           'AABBCC',
@@ -152,7 +152,7 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         ],
         [
           {
-            title: <Link to="/instanceDetail">56789</Link>
+            title: <Link to="/instanceDetail/56789">56789</Link>
           },
           '34543543',
           'DDEEFF',
@@ -161,7 +161,7 @@ class InstanceTable extends React.Component<IOwnProps, IStateProps> {
         ],
         [
           {
-            title: <Link to="/instanceDetail">34521</Link>
+            title: <Link to="/instanceDetail/34521">34521</Link>
           },
           '435435435',
           'GGHHII',
