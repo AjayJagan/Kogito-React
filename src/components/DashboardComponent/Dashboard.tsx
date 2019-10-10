@@ -1,27 +1,41 @@
 import React from 'react';
-import { Page, PageSidebar, SkipToContent } from '@patternfly/react-core';
-// make sure you've installed @patternfly/patternfly
+import { Page, SkipToContent } from '@patternfly/react-core';
 import { Route } from 'react-router-dom';
-import Overview from '../OverviewComponent/OverviewComponent';
 import './Dashboard.css';
-import InstanceDetailPage from '../InstanceDetails/InstanceDetailComponent';
-import Navbar from '../NavComponent/NavComponent';
 import HeaderComponent from '../PageHeaderComponent/HeaderComponent';
-import BreadcrumbComponent from '../PageBreadcrumbComponent/BreadcrumbComponent';
+import DataListComponent from '../ListDetailComponent/DataListComponent/DataListComponent';
+import InstanceDetailComponent from '../InstanceDetailsComponent/InstanceDetailComponent';
+
+{
+  /* The below code is to be removed in future */
+}
+// import BreadcrumbComponent from '../PageBreadcrumbComponent/BreadcrumbComponent';
+// import TabComponent from '../TestComponents/TabComponent/TabComponent';
+// import InstanceDetailPage from '../InstanceDetails/InstanceDetailComponent';
+// import Navbar from '../NavComponent/NavComponent';
+// import Overview from '../OverviewComponent/OverviewComponent';
+
 export interface IOwnProps {}
 export interface IStateProps {}
+
 class Dashboard extends React.Component<IOwnProps, IStateProps> {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
   render() {
     const pageId = 'main-content-page-layout-default-nav';
     const PageSkipToContent = <SkipToContent href={`#${pageId}`}>Skip to Content</SkipToContent>;
 
     return (
       <React.Fragment>
-        <Page
+        <Page header={<HeaderComponent />} skipToContent={PageSkipToContent} mainContainerId={pageId} className="page">
+          <Route exact path="/instanceDetail/:processInstanceID" component={InstanceDetailComponent} />
+          <Route exact path="/" component={DataListComponent} />
+        </Page>
+        {/* The below code is to be removed in future */}
+        {/* <Page
           header={<HeaderComponent />}
           sidebar={<PageSidebar nav={<Navbar />} />}
           isManagedSidebar
@@ -32,7 +46,8 @@ class Dashboard extends React.Component<IOwnProps, IStateProps> {
         >
           <Route exact path="/instanceDetail/:processInstanceID" component={InstanceDetailPage} />
           <Route exact path="/" component={Overview} />
-        </Page>
+        </Page> */}
+        {/* <InstanceDetailComponent /> */}
       </React.Fragment>
     );
   }
