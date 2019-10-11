@@ -16,16 +16,15 @@ class TimelineCard extends React.Component<IOwnProps, IStateProps> {
   }
 
   componentDidMount() {
-    const cardBody = (
-      <CardBody>
-        <TextContent style={{ maxWidth: '200em' }}>
-          <Text component={TextVariants.p}>A very long list ....................</Text>
-        </TextContent>
-      </CardBody>
-    );
     let tempArray = [];
     for (let i = 0; i < 20; i++) {
-      tempArray.push(cardBody);
+      tempArray.push(
+        <CardBody key={i}>
+          <TextContent style={{ maxWidth: '200em' }}>
+            <Text component={TextVariants.p}>A very long list ....................</Text>
+          </TextContent>
+        </CardBody>
+      );
     }
     this.setState({
       cardBodyArray: tempArray

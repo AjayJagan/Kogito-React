@@ -22,7 +22,7 @@ class DataListComponent extends React.Component<IOwnProps, IStateProps> {
   componentDidMount() {
     let tempArray = [];
     for (let i = 1; i < 20; i++) {
-      tempArray.push(<DataListItemComponent id={i} />);
+      tempArray.push(<DataListItemComponent id={i} key={i} />);
     }
     this.setState({
       dataListItemArray: tempArray

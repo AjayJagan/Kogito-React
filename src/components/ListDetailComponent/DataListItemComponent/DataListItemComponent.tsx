@@ -83,7 +83,7 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
                 <DataListCell key="secondary content">
                   <div>Chart To Added</div>
                 </DataListCell>,
-                <DataListCell key="secondary content 2">
+                <DataListCell key="Tertiary content ">
                   <div style={{ paddingLeft: '300px' }}>
                     <Link to={'/instanceDetail/' + id}>
                       <Button variant="secondary">Details</Button>
@@ -100,8 +100,8 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
                 onSelect={this.onSelect}
                 toggle={<KebabToggle onToggle={this.onToggle} />}
                 dropdownItems={[
-                  <DropdownItem key="link">Link</DropdownItem>,
-                  <DropdownItem key="action" component="button">
+                  <DropdownItem key={1}>Link</DropdownItem>,
+                  <DropdownItem key={2} component="button">
                     Action
                   </DropdownItem>
                 ]}
@@ -112,6 +112,7 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
             aria-label="Primary Content Details"
             id="ex-expand1"
             isHidden={this.state.expanded.includes('ex-toggle')}
+            key={5}
           >
             <p>More Information to be added here</p>
           </DataListContent>

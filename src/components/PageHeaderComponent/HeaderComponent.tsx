@@ -2,7 +2,6 @@ import React from 'react';
 import { PageHeader } from '@patternfly/react-core';
 import Avatar from '../AvatarComponent/AvatarComponent';
 import PageToolbarComponent from '../PageToolbarComponent/PageToolbarComponent';
-import { Link } from 'react-router-dom';
 import BrandComponent from '../BrandComponent/BrandComponent';
 export interface IOwnProps {}
 export interface IStateProps {}
@@ -13,12 +12,7 @@ export default class HeaderComponent extends React.Component<IOwnProps, IStatePr
   }
   render() {
     return (
-      <PageHeader
-        logo={<Link to="/">{<BrandComponent />}</Link>}
-        toolbar={<PageToolbarComponent />}
-        avatar={<Avatar />}
-        showNavToggle
-      />
+      <PageHeader logo={<BrandComponent />} toolbar={<PageToolbarComponent />} avatar={<Avatar />} showNavToggle />
     );
   }
 }
