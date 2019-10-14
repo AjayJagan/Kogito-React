@@ -1,5 +1,5 @@
 import React from 'react';
-import { DataList, PageSection } from '@patternfly/react-core';
+import { DataList, PageSection, Card } from '@patternfly/react-core';
 import ScrollArea from 'react-scrollbar';
 import './DataList.css';
 import DataListTitleComponent from '../DataListTitleComponent/DataListTitleComponent';
@@ -34,12 +34,15 @@ class DataListComponent extends React.Component<IOwnProps, IStateProps> {
       <React.Fragment>
         <DataListTitleComponent />
         <PageSection>
+          <Card>
+          <DataListToolbarComponent />
           <DataList aria-label="Expandable data list example">
-            <DataListToolbarComponent />
-            <ScrollArea smoothScrolling={true} style={{ width: '100%', height: '620px' }}>
+            <ScrollArea smoothScrolling={true}>
               {...this.state.dataListItemArray}
             </ScrollArea>
           </DataList>
+          </Card>
+
         </PageSection>
       </React.Fragment>
     );
