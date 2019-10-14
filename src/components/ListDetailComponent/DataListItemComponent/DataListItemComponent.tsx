@@ -5,6 +5,7 @@ import {
   DataListToggle,
   DataListItemCells,
   DataListCell,
+  DataListCheck,
   Checkbox,
   TextContent,
   Text,
@@ -34,7 +35,7 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
   constructor(props) {
     super(props);
     this.state = {
-      expanded: ['ex-toggle'],
+      expanded: ['kie-datalist-toggle'],
       isOpen: false
     };
     this.onToggle = isOpen => {
@@ -59,40 +60,44 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
 
     return (
       <React.Fragment>
-        <DataListItem aria-labelledby="ex-item" isExpanded={!this.state.expanded.includes('ex-toggle')}>
+        <DataListItem
+          aria-labelledby="kie-datalist-item"
+          isExpanded={!this.state.expanded.includes('kie-datalist-toggle')}
+        >
           <DataListItemRow>
             <DataListToggle
-              onClick={() => toggle('ex-toggle')}
-              isExpanded={!this.state.expanded.includes('ex-toggle')}
-              id="ex-toggle"
-              aria-controls="ex-expand"
+              onClick={() => toggle('kie-datalist-toggle')}
+              isExpanded={!this.state.expanded.includes('kie-datalist-toggle')}
+              id="kie-datalist-toggle"
+              aria-controls="kie-datalist-expand"
             />
-
+            <DataListCheck aria-labelledby="width-kie-datalist-item" name="width-kie-datalist-item" />
             <DataListItemCells
               dataListCells={[
-                <DataListCell key="primary content">
-                  <div style={{ display: 'flex' }}>
-                    <div style={{ paddingTop: '8px', paddingRight: '16px' }}>
-                      <Checkbox label="" aria-label="controlled checkbox example" id="check" name="check" />
-                    </div>
-                    <TextContent>
-                      <Text component={TextVariants.p}>Instance {id}</Text>
-                    </TextContent>
-                  </div>
-                </DataListCell>,
-                <DataListCell key="secondary content">
-                  <div>Chart To Added</div>
-                </DataListCell>,
-                <DataListCell key="Tertiary content ">
-                  <div style={{ paddingLeft: '300px' }}>
-                    <Link to={'/instanceDetail/' + id}>
-                      <Button variant="secondary">Details</Button>
-                    </Link>
-                  </div>
+                <DataListCell key="primary content">Instance {id}</DataListCell>,
+                <DataListCell key="secondary content">Chart to be added</DataListCell>,
+                // this should be removed in favor of the action below... but I can't get the link to work on the action
+                <DataListCell key="secondary content 2">
+                  <Link to={'/instanceDetail/' + id}>
+                    <Button variant="secondary">Old Details</Button>
+                  </Link>
                 </DataListCell>
               ]}
             />
-            <DataListAction aria-labelledby="ex-item1 ex-action1" id="ex-action" aria-label="Actions">
+            <DataListAction
+              aria-labelledby="kie-datalist-item kie-datalist-action"
+              id="kie-datalist-action"
+              aria-label="Actions"
+            >
+              <Button variant="secondary" component="a" href={'/instanceDetail/' + id}>
+                Details
+              </Button>
+            </DataListAction>
+            <DataListAction
+              aria-labelledby="kie-datalist-item kie-datalist-action"
+              id="kie-datalist-action"
+              aria-label="Actions"
+            >
               <Dropdown
                 isPlain
                 position={DropdownPosition.right}
@@ -110,9 +115,8 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
           </DataListItemRow>
           <DataListContent
             aria-label="Primary Content Details"
-            id="ex-expand1"
-            isHidden={this.state.expanded.includes('ex-toggle')}
-            key={5}
+            id="kie-datalist-expand1"
+            isHidden={this.state.expanded.includes('kie-datalist-toggle')}
           >
             <p>More Information to be added here</p>
           </DataListContent>
