@@ -89,9 +89,12 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
               id="kie-datalist-action"
               aria-label="Actions"
             >
-              <Button variant="secondary" component="a" href={'/instanceDetail/' + id}>
+              {/* <Button variant="secondary" component="a" href={'/instanceDetail/' + id}>
                 Details
-              </Button>
+              </Button> */}
+              <Link to={'/instanceDetail/' + id}>
+                <Button variant="secondary">Details</Button>
+              </Link>
             </DataListAction>
             <DataListAction
               aria-labelledby="kie-datalist-item kie-datalist-action"
