@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Button,
   ButtonVariant,
@@ -21,37 +21,25 @@ export interface IStateProps {
   isKebabDropdownOpen: boolean;
   isDropdownOpen: boolean;
 }
-export default class PageToolbarComponent extends React.Component<IOwnProps, IStateProps> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isKebabDropdownOpen: false,
-      isDropdownOpen: false
-    };
-  }
-  onDropdownToggle = isDropdownOpen => {
-    this.setState({
-      isDropdownOpen
-    });
+
+const PageToolbarComponent: React.FunctionComponent<IOwnProps> = () => {
+
+  const [isKebabDropdownOpen, setKebabDropdownOpen] = useState(false);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  
+  const onDropdownToggle = isDropdownOpen => {
+    setDropdownOpen(isDropdownOpen);
   };
 
-  onDropdownSelect = event => {
-    this.setState({
-      isDropdownOpen: !this.state.isDropdownOpen
-    });
+  const onDropdownSelect = () => {
+    setDropdownOpen(!isDropdownOpen);
   };
-  onKebabDropdownSelect = event => {
-    this.setState({
-      isKebabDropdownOpen: !this.state.isKebabDropdownOpen
-    });
+  const onKebabDropdownSelect = () => {
+    setKebabDropdownOpen(!isKebabDropdownOpen);
   };
-  onKebabDropdownToggle = isKebabDropdownOpen => {
-    this.setState({
-      isKebabDropdownOpen
-    });
+  const onKebabDropdownToggle = isKebabDropdownOpen => {
+    setKebabDropdownOpen(isKebabDropdownOpen);
   };
-  render() {
-    const { isDropdownOpen, isKebabDropdownOpen } = this.state;
     const kebabDropdownItems = [
       <DropdownItem>
         <BellIcon /> Notifications
@@ -88,8 +76,8 @@ export default class PageToolbarComponent extends React.Component<IOwnProps, ISt
             <Dropdown
               isPlain
               position="right"
-              onSelect={this.onKebabDropdownSelect}
-              toggle={<KebabToggle onToggle={this.onKebabDropdownToggle} />}
+              onSelect={onKebabDropdownSelect}
+              toggle={<KebabToggle onToggle={onKebabDropdownToggle} />}
               isOpen={isKebabDropdownOpen}
               dropdownItems={kebabDropdownItems}
             />
@@ -98,14 +86,15 @@ export default class PageToolbarComponent extends React.Component<IOwnProps, ISt
             <Dropdown
               isPlain
               position="right"
-              onSelect={this.onDropdownSelect}
+              onSelect={onDropdownSelect}
               isOpen={isDropdownOpen}
-              toggle={<DropdownToggle onToggle={this.onDropdownToggle}>User</DropdownToggle>}
+              toggle={<DropdownToggle onToggle={onDropdownToggle}>User</DropdownToggle>}
               dropdownItems={userDropdownItems}
             />
           </ToolbarItem>
         </ToolbarGroup>
       </Toolbar>
     );
-  }
 }
+
+export default PageToolbarComponent;

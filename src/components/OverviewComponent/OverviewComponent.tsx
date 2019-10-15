@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Card,
   CardBody,
@@ -16,19 +16,13 @@ export interface IOwnProps {}
 export interface IStateProps {
   instanceType: string;
 }
-class OverviewComponent extends React.Component<IOwnProps, IStateProps> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      instanceType: ''
-    };
-  }
-  onCardClick = detail => event => {
-    console.log(this.state.instanceType);
-    this.setState({ instanceType: detail });
-  };
 
-  render() {
+const OverviewComponent:React.FunctionComponent<IOwnProps> = () => {
+  const [instanceType, setinstanceType] = useState('');
+  const onCardClick = detail => event => {
+    // console.log(this.state.instanceType);
+    setinstanceType(detail);
+  };
     const instanceDetail = { ACTIVE: '1258', COMPLETED: '1150', ABORTED: '50', INERROR: '58' };
     return (
       <React.Fragment>
@@ -42,7 +36,7 @@ class OverviewComponent extends React.Component<IOwnProps, IStateProps> {
           <Gallery gutter="md">
             {Object.keys(instanceDetail).map((detail, index) => (
               <GalleryItem key={index}>
-                <Card isHoverable onClick={this.onCardClick(detail)}>
+                <Card isHoverable onClick={onCardClick(detail)}>
                   <CardBody>{detail}</CardBody>
                   <CardBody>{instanceDetail[detail]}</CardBody>
                 </Card>
@@ -57,11 +51,10 @@ class OverviewComponent extends React.Component<IOwnProps, IStateProps> {
           </TextContent>
         </PageSection>
         <PageSection>
-          <Table instanceType={this.state.instanceType}></Table>
+          <Table instanceType={instanceType}></Table>
         </PageSection>
       </React.Fragment>
     );
-  }
 }
 
 export default OverviewComponent;

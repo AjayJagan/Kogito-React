@@ -4,10 +4,7 @@ import Dashboard from '../DashboardComponent/Dashboard';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 export interface IOwnProps {}
 
-interface IStateProps {}
-
-export default class BaseLayout extends React.Component<IOwnProps, IStateProps> {
-  render() {
+const BaseLayout: React.FunctionComponent<IOwnProps> = (props) => {
     return (
       <div>
         <LoginPage>
@@ -19,5 +16,7 @@ export default class BaseLayout extends React.Component<IOwnProps, IStateProps> 
         </LoginPage>
       </div>
     );
-  }
 }
+
+
+export default BaseLayout;

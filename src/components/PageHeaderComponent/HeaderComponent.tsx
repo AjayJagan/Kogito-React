@@ -6,12 +6,8 @@ import { Link } from 'react-router-dom';
 import BrandComponent from '../BrandComponent/BrandComponent';
 export interface IOwnProps {}
 export interface IStateProps {}
-export default class HeaderComponent extends React.Component<IOwnProps, IStateProps> {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
+
+const HeaderComponent:React.FunctionComponent<IOwnProps> = () => {
     return (
       <PageHeader
         logo={<Link to="/">{<BrandComponent />}</Link>}
@@ -20,5 +16,6 @@ export default class HeaderComponent extends React.Component<IOwnProps, IStatePr
         showNavToggle
       />
     );
-  }
 }
+
+export default HeaderComponent;

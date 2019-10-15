@@ -2,12 +2,7 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem } from '@patternfly/react-core';
 export interface IOwnProps {}
 export interface IStateProps {}
-export default class BreadcrumbComponent extends React.Component<IOwnProps, IStateProps> {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
+const BreadcrumbComponent: React.FunctionComponent<IOwnProps> = () => {
     return (
       <Breadcrumb>
         <BreadcrumbItem>Section Home</BreadcrumbItem>
@@ -18,5 +13,6 @@ export default class BreadcrumbComponent extends React.Component<IOwnProps, ISta
         </BreadcrumbItem>
       </Breadcrumb>
     );
-  }
 }
+
+export default BreadcrumbComponent;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { LoginForm, LoginMainFooterBandItem, LoginPage, BackgroundImageSrc } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 const brandImage = require('../../static/kogito_logo.png');
@@ -24,45 +24,53 @@ const images = {
   [BackgroundImageSrc.xs2x]: backgroundImage,
   [BackgroundImageSrc.filter]: '/assets/images/background-filter.svg#image_overlay'
 };
-class Login extends React.Component<IOwnProps, IStateprops> {
-  constructor(props: IOwnProps) {
-    super(props);
-    this.state = {
-      showHelperText: false,
-      usernameValue: '',
-      isValidUsername: true,
-      passwordValue: '',
-      isValidPassword: true,
-      isRememberMeChecked: false,
-      isAuthenticated: false
-    };
-  }
 
-  handleUsernameChange = value => {
-    this.setState({ usernameValue: value });
+// constructor(props: IOwnProps) {
+//   super(props);
+//     state = {
+//     showHelperText: false,
+//     usernameValue: '',
+//     isValidUsername: true,
+//     passwordValue: '',
+//     isValidPassword: true,
+//     isRememberMeChecked: false,
+//     isAuthenticated: false
+//   };
+// }
+const Login: React.FunctionComponent<IOwnProps> = (props) => {
+  
+  const [showHelperText, setshowHelperText] = useState(false);
+  const [usernameValue, setusernameValue] = useState('');
+  const [isValidUsername, setisValidUsername] = useState(true);
+  const [passwordValue, setpasswordValue] = useState('');
+  const [isValidPassword, setisValidPassword] = useState(true);
+  const [isRememberMeChecked, setisRememberMeChecked] = useState(false);
+  const [isAuthenticated, setisAuthenticated] = useState(false);
+
+  const handleUsernameChange = value => {
+    setusernameValue(value);
   };
 
-  handlePasswordChange = passwordValue => {
-    this.setState({ passwordValue });
+  const handlePasswordChange = passwordValue => {
+    setpasswordValue(passwordValue);
   };
 
-  onRememberMeClick = () => {
-    this.setState({ isRememberMeChecked: !this.state.isRememberMeChecked });
+  const onRememberMeClick = () => {
+    setisRememberMeChecked(!isRememberMeChecked);
   };
 
-  onLoginButtonClick = event => {
+  const onLoginButtonClick = event => {
     event.preventDefault();
-    this.setState({ isValidUsername: !!this.state.usernameValue });
-    this.setState({ isValidPassword: !!this.state.passwordValue });
-    this.setState({ showHelperText: !this.state.usernameValue || !this.state.passwordValue });
-    if (this.state.isValidUsername && this.state.isValidPassword) {
-      if (this.state.usernameValue == 'admin' && this.state.passwordValue == 'admin') {
-        this.setState({ isAuthenticated: true });
+    setisValidUsername(!!usernameValue);
+    setisValidPassword(!!passwordValue);
+      setshowHelperText(! usernameValue || ! passwordValue );
+    if (isValidUsername && isValidPassword) {
+      if (usernameValue == 'admin' && passwordValue == 'admin') {
+        setisAuthenticated(true);
       }
     }
   };
 
-  render() {
     const helperText = (
       <React.Fragment>
         <ExclamationCircleIcon />
@@ -83,24 +91,24 @@ class Login extends React.Component<IOwnProps, IStateprops> {
 
     const loginForm = (
       <LoginForm
-        showHelperText={this.state.showHelperText}
+        showHelperText={showHelperText}
         helperText={helperText}
         usernameLabel="Username"
-        usernameValue={this.state.usernameValue}
-        onChangeUsername={this.handleUsernameChange}
-        isValidUsername={this.state.isValidUsername}
+        usernameValue={usernameValue}
+        onChangeUsername={handleUsernameChange}
+        isValidUsername={isValidUsername}
         passwordLabel="Password"
-        passwordValue={this.state.passwordValue}
-        onChangePassword={this.handlePasswordChange}
-        isValidPassword={this.state.isValidPassword}
+        passwordValue={passwordValue}
+        onChangePassword={handlePasswordChange}
+        isValidPassword={isValidPassword}
         rememberMeLabel="Keep me logged in for 30 days."
-        isRememberMeChecked={this.state.isRememberMeChecked}
-        onChangeRememberMe={this.onRememberMeClick}
-        onLoginButtonClick={this.onLoginButtonClick}
+        isRememberMeChecked={isRememberMeChecked}
+        onChangeRememberMe={onRememberMeClick}
+        onLoginButtonClick={onLoginButtonClick}
       />
     );
-    if (this.state.isAuthenticated) {
-      return this.props.children;
+    if (isAuthenticated) {
+      return props.children;
     }
     return (
       <LoginPage
@@ -120,6 +128,5 @@ class Login extends React.Component<IOwnProps, IStateprops> {
       </LoginPage>
     );
   }
-}
 
 export default Login;
