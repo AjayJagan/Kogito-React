@@ -1,39 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Card, CardHeader, CardBody } from '@patternfly/react-core';
 import { TextContent, Text, TextVariants } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
 import { Title, EmptyState, EmptyStateVariant, EmptyStateIcon, EmptyStateBody } from '@patternfly/react-core';
 export interface IOwnProps {}
-export interface IStateProps {
-  tabDetails: string;
-}
-export default class CardBig extends React.Component<IOwnProps, IStateProps> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tabDetails: ''
-    };
-  }
-  handleOnClick = tabDetail => event => {
-    this.setState({ tabDetails: tabDetail });
+
+const CardBig:React.FunctionComponent<IOwnProps> = () => {
+  const [tabDetails, settabDetails] = useState('');
+  const handleOnClick = tabDetail => event => {
+    settabDetails(tabDetail);
   };
-  render() {
     return (
       <Card style={{ minHeight: '30em' }}>
         <CardHeader>
           <div className="pf-l-flex pf-m-justify-content-space-evenly pf-m-align-items-center pf-m-align-content-center">
             <TextContent>
-              <Text component={TextVariants.a} href="#" onClick={this.handleOnClick('Process Diagram')}>
+              <Text component={TextVariants.a} href="#" onClick={handleOnClick('Process Diagram')}>
                 Process Diagram
               </Text>
             </TextContent>
             <TextContent>
-              <Text component={TextVariants.a} href="#" onClick={this.handleOnClick('Process Log Events')}>
+              <Text component={TextVariants.a} href="#" onClick={handleOnClick('Process Log Events')}>
                 Process Log Events
               </Text>
             </TextContent>
             <TextContent>
-              <Text component={TextVariants.a} href="#" onClick={this.handleOnClick('Variables')}>
+              <Text component={TextVariants.a} href="#" onClick={handleOnClick('Variables')}>
                 Variables
               </Text>
             </TextContent>
@@ -41,7 +33,7 @@ export default class CardBig extends React.Component<IOwnProps, IStateProps> {
         </CardHeader>
         <hr className="pf-c-divider"></hr>
         {(() => {
-          if (this.state.tabDetails == 'Process Diagram') {
+          if (tabDetails == 'Process Diagram') {
             return (
               <CardBody>
                 <EmptyState variant={EmptyStateVariant.full}>
@@ -53,7 +45,7 @@ export default class CardBig extends React.Component<IOwnProps, IStateProps> {
                 </EmptyState>
               </CardBody>
             );
-          } else if (this.state.tabDetails == 'Process Log Events') {
+          } else if (tabDetails == 'Process Log Events') {
             return (
               <CardBody>
                 <EmptyState variant={EmptyStateVariant.full}>
@@ -65,7 +57,7 @@ export default class CardBig extends React.Component<IOwnProps, IStateProps> {
                 </EmptyState>
               </CardBody>
             );
-          } else if (this.state.tabDetails == 'Variables') {
+          } else if (tabDetails == 'Variables') {
             return (
               <CardBody>
                 <EmptyState variant={EmptyStateVariant.full}>
@@ -93,5 +85,4 @@ export default class CardBig extends React.Component<IOwnProps, IStateProps> {
         })()}
       </Card>
     );
-  }
 }

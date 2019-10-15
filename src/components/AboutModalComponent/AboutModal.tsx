@@ -1,36 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { AboutModal, Button, TextContent, TextList, TextListItem } from '@patternfly/react-core';
 import './AboutModal.css';
 export interface IOwnProps {}
 
 export interface IStateprops {
-  isModalOpen: boolean;
 }
-class AboutModalBox extends React.Component<IOwnProps, IStateprops> {
-  handleModalToggle: () => void;
-  constructor(props) {
-    super(props);
-    this.state = {
-      isModalOpen: false
-    };
-    this.handleModalToggle = () => {
-      this.setState(({ isModalOpen }) => ({
-        isModalOpen: !isModalOpen
-      }));
-    };
-  }
 
-  render() {
-    const { isModalOpen } = this.state;
-
+const AboutModalBox:React.FunctionComponent<IOwnProps> = () => {
+    const [isModalOpen, setisModalOpen] = useState(false);
+    const handleModalToggle = () => {
+      setisModalOpen(!isModalOpen);
+    }
     return (
       <React.Fragment>
-        <Button variant="primary" onClick={this.handleModalToggle}>
+        <Button variant="primary" onClick={handleModalToggle}>
           About
         </Button>
         <AboutModal
           isOpen={isModalOpen}
-          onClose={this.handleModalToggle}
+          onClose={handleModalToggle}
           trademark="Trademark and copyright information here"
           brandImageAlt="Kogito Logo"
           brandImageSrc={require('../../static/kogito_about_logo.png')}
@@ -57,6 +45,5 @@ class AboutModalBox extends React.Component<IOwnProps, IStateprops> {
         </AboutModal>
       </React.Fragment>
     );
-  }
 }
 export default AboutModalBox;

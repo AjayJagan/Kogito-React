@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardHeader, CardBody, CardFooter } from '@patternfly/react-core';
 import { ChartArea, ChartGroup, ChartLabel, ChartVoronoiContainer } from '@patternfly/react-charts';
 import { TextContent, Text, TextVariants } from '@patternfly/react-core';
@@ -9,38 +9,26 @@ export interface IStateProps {
   activeTabKey: number;
   isOpen: boolean;
 }
-export default class CardComponent extends React.Component<IOwnProps, IStateProps> {
-  handleTabClick: (event: any, tabIndex: any) => void;
-  onToggle: (isOpen: any) => void;
-  onSelect: (event: any) => void;
-  constructor(props) {
-    super(props);
-    this.state = { activeTabKey: 0, isOpen: false };
-    this.handleTabClick = (event, tabIndex) => {
-      this.setState({
-        activeTabKey: tabIndex
-      });
-    };
-    this.onToggle = isOpen => {
-      this.setState({
-        isOpen
-      });
-    };
-    this.onSelect = event => {
-      this.setState({
-        isOpen: !this.state.isOpen
-      });
-    };
-  }
 
-  render() {
+const CardComponent:React.FunctionComponent<IOwnProps> = () => {
+    const [ activeTabKey, setActiveTabKey] = useState(0);
+    const [ isOpen, setisOpen] = useState(false);
+    const handleTabClick = (event, tabIndex) => {
+      setActiveTabKey(tabIndex);
+    };
+    const onToggle = isOpen => {
+      setisOpen(isOpen);
+    };
+    const onSelect = event => {
+      setisOpen(!isOpen);
+    };
     const chartData = [
       { name: 'Cats', x: 1, y: 3 },
       { name: 'Cats', x: 2, y: 4 },
       { name: 'Cats', x: 3, y: 8 },
       { name: 'Cats', x: 4, y: 6 }
     ];
-    const { isOpen } = this.state;
+    // const { isOpen } =   state;
     const dropdownItems = [
       <DropdownItem key="link">Link</DropdownItem>,
       <DropdownItem key="action" component="button">
@@ -65,9 +53,9 @@ export default class CardComponent extends React.Component<IOwnProps, IStateProp
             <Text component={TextVariants.p}>Activities</Text>
           </TextContent>
           <Dropdown
-            onSelect={this.onSelect}
+            onSelect={onSelect}
             toggle={
-              <DropdownToggle onToggle={this.onToggle} iconComponent={CaretDownIcon}>
+              <DropdownToggle onToggle={  onToggle} iconComponent={CaretDownIcon}>
                 Dropdown
               </DropdownToggle>
             }
@@ -100,5 +88,6 @@ export default class CardComponent extends React.Component<IOwnProps, IStateProp
         <CardFooter>Design This Part</CardFooter>
       </Card>
     );
-  }
 }
+
+export default CardComponent;

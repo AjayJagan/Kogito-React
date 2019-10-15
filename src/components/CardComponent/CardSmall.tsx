@@ -8,16 +8,15 @@ export interface IOwnProps {
   smallText: string;
 }
 export interface IStateProps {}
-export default class CardComponent extends React.Component<IOwnProps, IStateProps> {
-  render() {
+const CardComponent:React.FunctionComponent<IOwnProps> = (props) => {
     return (
       <Card isCompact>
         <CardBody>
           <div className="pf-l-flex pf-m-justify-content-center">
-            {this.props.icon}
+            {props.icon}
             <TextContent>
               <Text component={TextVariants.a} href="#">
-                {this.props.overviewText}
+                {props.overviewText}
               </Text>
             </TextContent>
           </div>
@@ -25,11 +24,12 @@ export default class CardComponent extends React.Component<IOwnProps, IStateProp
         <CardBody>
           <div className="pf-l-flex pf-m-justify-content-center">
             <TextContent>
-              <Text component={TextVariants.small}>{this.props.smallText}</Text>
+              <Text component={TextVariants.small}>{props.smallText}</Text>
             </TextContent>
           </div>
         </CardBody>
       </Card>
     );
-  }
 }
+
+export default CardComponent;
