@@ -1,3 +1,6 @@
 .styleToolBar > * {
   padding-right: 25px;
 }
+.scrollArea {
+  max-height: 625px;
+}

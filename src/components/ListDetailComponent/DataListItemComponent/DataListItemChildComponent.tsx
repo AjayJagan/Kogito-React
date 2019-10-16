@@ -19,30 +19,21 @@ import {
   DropdownPosition
 } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
-import DataListChild from '../DataListItemComponent/DataListItemChildComponent';
-import DataListItemChildComponent from '../DataListItemComponent/DataListItemChildComponent';
 
-export interface IOwnProps {
-  id: number;
-  instanceID: string;
-  instanceState: string;
-  processID: string;
-  parentInstanceID: string | null;
-}
+export interface IOwnProps {}
 export interface IStateProps {
   isOpen: boolean;
   expanded: Array<string>;
   isChecked: boolean;
 }
 
-class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
+class DataListItemChildComponent extends React.Component<IOwnProps, IStateProps> {
   onToggle: (isOpen: boolean) => void;
   onSelect: (event: any) => void;
   onCheckBoxClick: () => void;
 
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
       expanded: ['kie-datalist-toggle'],
       isOpen: false,
@@ -97,9 +88,7 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
             />
             <DataListItemCells
               dataListCells={[
-                <DataListCell key="primary content">
-                  Instance {id} ({this.props.processID})
-                </DataListCell>,
+                <DataListCell key="primary content">Instance {id}</DataListCell>,
                 <DataListCell key="secondary content">Chart to be added</DataListCell>,
                 // this should be removed in favor of the action below... but I can't get the link to work on the action
                 <DataListCell key="secondary content 2">
@@ -154,4 +143,4 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
   }
 }
 
-export default DataListItemComponent;
+export default DataListItemChildComponent;
