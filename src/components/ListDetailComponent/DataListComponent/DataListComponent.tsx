@@ -30,23 +30,10 @@ class DataListComponent extends React.Component<IOwnProps, IStateProps> {
           }
         }
       `
-    });
-    let tempArray = [];
-    console.log(result.data);
-    result.data.ProcessInstances.map((item, index) => {
-      tempArray.push(
-        <DataListItemComponent
-          id={index}
-          key={index}
-          instanceState={item.state}
-          instanceID={item.id}
-          processID={item.processId}
-          parentInstanceID={item.parentProcessInstanceId}
-        />
-      );
+    
     });
     this.setState({
-      initData: tempArray,
+      initData: result.data.ProcessInstances,
       loading: result.loading
     });
   }
@@ -59,14 +46,6 @@ class DataListComponent extends React.Component<IOwnProps, IStateProps> {
     };
     this.fetchData(props);
   }
-
-  componentDidMount() {
-    // let tempArray = [];
-    // for (let i = 0; i < this.state.dataListItemArray; i++) {
-    //   tempArray.push(<DataListItemComponent id={i} key={i} />);
-    // }
-  }
-
   render() {
     return (
       <React.Fragment>
@@ -76,7 +55,15 @@ class DataListComponent extends React.Component<IOwnProps, IStateProps> {
             <DataListToolbarComponent />
             <DataList aria-label="Expandable data list example">
               <ScrollArea smoothScrolling={true} className="scrollArea">
-                {...this.state.initData}
+                {/* {...this.state.initData} */}
+                {this.state.loading?"loading...":this.state.initData.map((item,index)=>{
+                  return <DataListItemComponent id={index}
+                    key={index}
+                    instanceState={item.state}
+                    instanceID={item.id}
+                    processID={item.processId}
+                    parentInstanceID={item.parentProcessInstanceId}/>
+                })}
               </ScrollArea>
             </DataList>
           </Card>
