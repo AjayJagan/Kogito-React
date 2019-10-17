@@ -8,6 +8,7 @@ import InstanceDetailPage from '../InstanceDetails/InstanceDetailComponent';
 import Navbar from '../NavComponent/NavComponent';
 import HeaderComponent from '../PageHeaderComponent/HeaderComponent';
 import BreadcrumbComponent from '../PageBreadcrumbComponent/BreadcrumbComponent';
+import DataListComponent from '../ListDetailComponent/DataListComponent/DataListComponent';
 export interface IOwnProps {}
 export interface IStateProps {}
 class Dashboard extends React.Component<IOwnProps, IStateProps> {
@@ -21,7 +22,11 @@ class Dashboard extends React.Component<IOwnProps, IStateProps> {
 
     return (
       <React.Fragment>
-        <Page
+        <Page header={<HeaderComponent />} skipToContent={PageSkipToContent} mainContainerId={pageId} className="page">
+          <Route exact path="/instanceDetail/:processInstanceID" component={InstanceDetailComponent} />
+          <Route exact path="/" component={DataListComponent} />
+        </Page>
+        {/* <Page
           header={<HeaderComponent />}
           sidebar={<PageSidebar nav={<Navbar />} />}
           isManagedSidebar
@@ -32,7 +37,7 @@ class Dashboard extends React.Component<IOwnProps, IStateProps> {
         >
           <Route exact path="/instanceDetail/:processInstanceID" component={InstanceDetailPage} />
           <Route exact path="/" component={Overview} />
-        </Page>
+        </Page> */}
       </React.Fragment>
     );
   }
