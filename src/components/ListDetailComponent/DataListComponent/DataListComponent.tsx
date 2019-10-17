@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { DataList, PageSection, Card } from '@patternfly/react-core';
 import ScrollArea from 'react-scrollbar';
-import './DataList.css';
 import DataListTitleComponent from '../DataListTitleComponent/DataListTitleComponent';
 import DataListToolbarComponent from '../DataListToolbarComponent/DataListToolbarComponent';
 import DataListItemComponent from '../DataListItemComponent/DataListItemComponent';
-import { graphql } from 'react-apollo';
+import { withApollo } from 'react-apollo';
 import { useQuery } from '@apollo/react-hooks';
-// import gql from 'graphql-tag';
-import query from './fetchQuery';
+import gql from 'graphql-tag';
 
 export interface IOwnProps {}
 export interface IStateProps {
@@ -18,27 +16,20 @@ export interface IStateProps {
 }
 
 const DataListComponent:React.FunctionComponent<IOwnProps> = (props) => {
-   
-    const [dataListArray, setDataListArray] = useState([]);
-    const [initData, setInitData] = useState(null);
-    const [loading, setLoading] = useState(true);
 
-    const fetchData = async (props: any) =>{
-        // const { client } = props;
-        const {data, loading} = useQuery(query,{});
-        setInitData(data.ProcessInstances);
-        setLoading(loading);
+  const GET_QUERY = gql`
+  query {
+      ProcessInstances(filter: { parentProcessInstanceId: null }) {
+        id
+        processId
+        parentProcessInstanceId
+        roles
+        state
       }
-
-
-//       useQuery(mutation,{
-//         variables: {
-//             title: title
-//         },
-//         refetchQueries: [{ query: query }]
-//     }).then(()=> hashHistory.push('/'))
-// }
-    fetchData(props);
+  }`;
+  
+    const{data, loading, error} = useQuery(GET_QUERY);
+    if (error) return `Error! ${error.message}`;
 
     return (
       <React.Fragment>
@@ -47,9 +38,10 @@ const DataListComponent:React.FunctionComponent<IOwnProps> = (props) => {
           <Card>
             <DataListToolbarComponent />
             <DataList aria-label="Expandable data list example">
-              <ScrollArea smoothScrolling={true} className="scrollArea">
+              <ScrollArea smoothScrolling={true} className="scrollArea">  
+
                 {/* {...this.state.initData} */}
-                {loading?"loading...": initData.map((item,index)=>{
+                { !loading && data && data.ProcessInstances.map((item,index)=>{
                   return <DataListItemComponent id={index}
                     key={index}
                     instanceState={item.state}
@@ -65,4 +57,4 @@ const DataListComponent:React.FunctionComponent<IOwnProps> = (props) => {
     );
 }
 
-export default graphql(query)(DataListComponent as any);
+export default withApollo(DataListComponent as any);

@@ -4,7 +4,7 @@ import { Page, PageSidebar, SkipToContent } from '@patternfly/react-core';
 import { Route } from 'react-router-dom';
 import Overview from '../OverviewComponent/OverviewComponent';
 import './Dashboard.css';
-import InstanceDetailPage from '../InstanceDetails/InstanceDetailComponent';
+import InstanceDetailComponent from '../InstanceDetailsComponent/InstanceDetailComponent';
 import Navbar from '../NavComponent/NavComponent';
 import HeaderComponent from '../PageHeaderComponent/HeaderComponent';
 import BreadcrumbComponent from '../PageBreadcrumbComponent/BreadcrumbComponent';

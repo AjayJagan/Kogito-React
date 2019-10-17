@@ -1,26 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Nav, NavItem, NavList } from '@patternfly/react-core';
 export interface IOwnProps {}
 export interface IStateProps {
   activeItem: number;
 }
-export default class NavComponent extends React.Component<IOwnProps, IStateProps> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeItem: 0
-    };
-  }
-  onNavSelect = result => {
-    this.setState({
-      activeItem: result.itemId
-    });
+
+const NavComponent: React.FunctionComponent<IOwnProps> = (props) => {
+  const [activeItem, setActiveItem] = useState(0);
+  const onNavSelect = result => {
+    setActiveItem(result.itemId);
   };
-  render() {
-    const { activeItem } = this.state;
     const navItems = ['Services', 'Policy', 'Authentication', 'Network Services', 'Server'];
     return (
-      <Nav onSelect={this.onNavSelect} aria-label="Nav">
+      <Nav onSelect={onNavSelect} aria-label="Nav">
         <NavList>
           {navItems.map((navItem, index) => (
             <NavItem itemId={index} isActive={activeItem === index}>
@@ -30,5 +22,6 @@ export default class NavComponent extends React.Component<IOwnProps, IStateProps
         </NavList>
       </Nav>
     );
-  }
 }
+
+export default NavComponent;

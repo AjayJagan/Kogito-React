@@ -19,12 +19,12 @@ import {
   DropdownPosition
 } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
-import DataListChild from '../DataListItemComponent/DataListItemChildComponent';
-import DataListItemChildComponent from '../DataListItemComponent/DataListItemChildComponent';
+// import DataListChild from '../DataListItemComponent/DataListItemChildComponent';
+// import DataListItemChildComponent from '../DataListItemComponent/DataListItemChildComponent';
 import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
+import { withApollo } from 'react-apollo';
 import { useQuery } from '@apollo/react-hooks';
-import query from './fetchQuery';
+// import query from './fetchQuery';
 
 export interface IOwnProps {
   id: number;
@@ -42,85 +42,50 @@ export interface IStateProps {
   childList:any;
 }
 
-// constructor(props) {
-//   super(props);
-//     = {
-//     expanded: ['kie-datalist-toggle'],
-//     isOpen: false,
-//     isChecked: false,
-//     isLoaded: false,
-//     childList: [],
-//   };
-// }
 
 const DataListItemComponent:React.FunctionComponent<IOwnProps> = (props) => {
+  
+  const GET_QUERY = gql`
+  query getQuery($parentProcessInstanceId: String!){
+  ProcessInstances(filter: { parentProcessInstanceId: $parentProcessInstanceId }) {
+    id
+    processId
+    parentProcessInstanceId
+    roles
+    state
+  }
+}
+`;
 
   const [expanded, setExpanded] = useState(['kie-datalist-toggle']);
   const [isOpen, setisOpen] = useState(false);
   const [isChecked, setisChecked] = useState(false);
-  const [isLoaded, setisLoaded] = useState(false);
-  const [childList, setChidList] = useState([]);
 
-  const fetchData = async() => {
-    const { client } =  props;
-    console.log("client", client);
-    console.log('id',props.instanceID)
-    const {data, loading} = useQuery(query,{});
-    console.log("inside the child",data)
-    return data.ProcessInstances;
-  }
+  const parentProcessInstanceId = props.instanceID
 
-  
+  const {data, loading, error} = useQuery(GET_QUERY, {
+    variables: { parentProcessInstanceId  },
+  }); 
 
   const onSelect = event => {
     setisOpen((previsOpen) => !previsOpen)
-
-    //  setState(prevState => ({
-    //   isOpen: !prevState.isOpen
-    // }));
   };
 
   const onCheckBoxClick = () => {
     console.log(isChecked);
     setisChecked(!isChecked);
-    //  .isChecked
-    //   ?  setState({ isChecked: ! .isChecked })
-    //   :  setState({ isChecked: ! .isChecked });
-  }
-
-  const onToggleMore = async () => {
-    console.log('inside toggle')
-    if (isLoaded) {
-      console.log("the state is loaded")
-    }
-    else {
-      console.log("state is not loaded")
-      let childData = await fetchData();
-      console.log('the childe data', childData)
-      //  setState({
-      //   childList: childData,
-      //   isLoaded: true,
-      // })
-      setChidList(childData);
-      setisLoaded(true);
-    }
   }
 
   const onToggle = isOpen => {
     console.log('inside toggle')
     setisOpen(isOpen);
-    //  setState({ isOpen });
-
   }
 
   const toggle = id => {
-    // const expanded =  .expanded;
     const index = expanded.indexOf(id);
     const newExpanded =
       index >= 0 ? [...expanded.slice(0, index), ...expanded.slice(index + 1, expanded.length)] : [...expanded, id];
-    //  setState(() => ({ expanded: newExpanded }));
     setExpanded(newExpanded)
-    onToggleMore()
   };
 
     const { id } = props;
@@ -197,7 +162,7 @@ const DataListItemComponent:React.FunctionComponent<IOwnProps> = (props) => {
             id="kie-datalist-expand1"
             isHidden={expanded.includes('kie-datalist-toggle')}
           >
-            {!isLoaded ? "Loading....." : childList.map((child, index) => <DataListItemComponentWithApollo id={index}
+            {loading ? "Loading....." : data.ProcessInstances.map((child, index) => <DataListItemComponentWithApollo id={index}
               key={index}
               instanceState={child.state}
               instanceID={child.id}
@@ -209,6 +174,6 @@ const DataListItemComponent:React.FunctionComponent<IOwnProps> = (props) => {
     );
 }
 
-const DataListItemComponentWithApollo = graphql(query)(DataListItemComponent as any);
+const DataListItemComponentWithApollo = withApollo(DataListItemComponent as any);
 
 export default DataListItemComponentWithApollo;

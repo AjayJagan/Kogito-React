@@ -7,7 +7,7 @@ const PORT = process.env.PORT || '9000';
 
 module.exports = merge(common, {
   mode: 'development',
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   devServer: {
     contentBase: './dist',
     host: HOST,
@@ -19,7 +19,8 @@ module.exports = merge(common, {
     overlay: true,
     open: true
   },
-  plugins: [new BundleAnalyzerPlugin()],
+  plugins: [new BundleAnalyzerPlugin()
+  ],
   module: {
     rules: [
       {
