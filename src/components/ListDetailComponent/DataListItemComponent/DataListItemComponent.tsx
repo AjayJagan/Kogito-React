@@ -6,10 +6,6 @@ import {
   DataListItemCells,
   DataListCell,
   DataListCheck,
-  Checkbox,
-  TextContent,
-  Text,
-  TextVariants,
   Button,
   DataListAction,
   Dropdown,
@@ -19,8 +15,6 @@ import {
   DropdownPosition
 } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
-import DataListChild from '../DataListItemComponent/DataListItemChildComponent';
-import DataListItemChildComponent from '../DataListItemComponent/DataListItemChildComponent';
 import gql from 'graphql-tag';
 import { withApollo } from 'react-apollo';
 
@@ -36,15 +30,23 @@ export interface IStateProps {
   isOpen: boolean;
   expanded: Array<string>;
   isChecked: boolean;
-  isLoaded:boolean;
-  childList:any;
+  isLoaded: boolean;
+  childList: any;
 }
 
 class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      expanded: ['kie-datalist-toggle'],
+      isOpen: false,
+      isChecked: false,
+      isLoaded: false,
+      childList: []
+    };
+  }
   async fetchData() {
     const { client } = this.props;
-    console.log("client", client);
-    console.log('id',this.props.instanceID)
     const result = await client.query({
       query: gql`
         {
@@ -58,21 +60,8 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
         }
       `
     });
-    console.log("inside the child",result)
     return result.data.ProcessInstances;
   }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      expanded: ['kie-datalist-toggle'],
-      isOpen: false,
-      isChecked: false,
-      isLoaded: false,
-      childList: [],
-    };
-  }
-
   onSelect = event => {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen
@@ -80,41 +69,30 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
   };
 
   onCheckBoxClick = () => {
-    console.log(this.state.isChecked);
     this.state.isChecked
       ? this.setState({ isChecked: !this.state.isChecked })
       : this.setState({ isChecked: !this.state.isChecked });
-  }
-
-  onToggleMore = async () => {
-    console.log('inside toggle')
-    if (this.state.isLoaded) {
-      console.log("the state is loaded")
-    }
-    else {
-      console.log("state is not loaded")
-      let childData = await this.fetchData();
-      console.log('the childe data', childData)
-      this.setState({
-        childList: childData,
-        isLoaded: true,
-      })
-    }
-  }
+  };
 
   onToggle = isOpen => {
-    console.log('inside toggle')
     this.setState({ isOpen });
+  };
 
-  }
-
-  toggle = id => {
+  toggle = async id => {
     const expanded = this.state.expanded;
     const index = expanded.indexOf(id);
     const newExpanded =
       index >= 0 ? [...expanded.slice(0, index), ...expanded.slice(index + 1, expanded.length)] : [...expanded, id];
     this.setState(() => ({ expanded: newExpanded }));
-    this.onToggleMore()
+    if (this.state.isLoaded) {
+    } else {
+      let childData = await this.fetchData();
+
+      this.setState({
+        childList: childData,
+        isLoaded: true
+      });
+    }
   };
 
   render() {
@@ -152,9 +130,11 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
                   <Link to={'/instanceDetail/' + id}>
                     <Button variant="secondary">Old Details</Button>
                   </Link>
-                </DataListCell>
+                </DataListCell>,
+                <DataListCell key="secondary content 3">{this.props.instanceState}</DataListCell>
               ]}
             />
+
             <DataListAction
               aria-labelledby="kie-datalist-item kie-datalist-action"
               id="kie-datalist-action"
@@ -192,12 +172,18 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
             id="kie-datalist-expand1"
             isHidden={this.state.expanded.includes('kie-datalist-toggle')}
           >
-            {!this.state.isLoaded ? "Loading....." : this.state.childList.map((child, index) => <DataListItemComponentWithApollo id={index}
-              key={index}
-              instanceState={child.state}
-              instanceID={child.id}
-              processID={child.processId}
-              parentInstanceID={child.parentProcessInstanceId}/>)}
+            {!this.state.isLoaded
+              ? 'Loading.....'
+              : this.state.childList.map((child, index) => (
+                  <DataListItemComponentWithApollo
+                    id={index}
+                    key={index}
+                    instanceState={child.state}
+                    instanceID={child.id}
+                    processID={child.processId}
+                    parentInstanceID={child.parentProcessInstanceId}
+                  />
+                ))}
           </DataListContent>
         </DataListItem>
       </React.Fragment>
@@ -205,6 +191,6 @@ class DataListItemComponent extends React.Component<IOwnProps, IStateProps> {
   }
 }
 
-const DataListItemComponentWithApollo = withApollo<IOwnProps>(DataListItemComponent as any);
+const DataListItemComponentWithApollo = withApollo<IOwnProps>(DataListItemComponent);
 
 export default DataListItemComponentWithApollo;
