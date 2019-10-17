@@ -124,3 +124,5 @@ const CardComponent:React.FunctionComponent<IOwnProps> = (props) => {
       );
     }
 }
+
+export default CardComponent;
