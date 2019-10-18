@@ -108,18 +108,26 @@ class DataListComponent extends React.Component<IOwnProps, IStateProps> {
       filterArray: tempArr
     });
   };
+  removeChecked = id => {
+    if (id.toString().toLowerCase() == 'active') {
+      this.setState({ isActiveChecked: false });
+    } else if (id.toString().toLowerCase() == 'completed') {
+      this.setState({ isCompletedChecked: false });
+    }
+  };
   render() {
     return (
       <React.Fragment>
         <DataListTitleComponent />
         <PageSection>
-          <Card>
+          <Card className="dataList">
             <DataListToolbarComponent
               isActive={this.state.isActiveChecked}
               isComplete={this.state.isCompletedChecked}
               handleChange={this.handleChange}
               checkedArray={this.state.checkedArray}
               filterClick={this.onFilterClick}
+              removeCheck={this.removeChecked}
             />
             <DataList aria-label="Expandable data list example">
               <ScrollArea smoothScrolling={true} className="scrollArea">

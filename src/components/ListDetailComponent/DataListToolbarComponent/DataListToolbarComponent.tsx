@@ -22,6 +22,7 @@ export interface IOwnProps {
   checkedArray: any;
   handleChange: any;
   filterClick: any;
+  removeCheck: any;
 }
 export interface IStateProps {
   chipGroups: any;
@@ -59,6 +60,24 @@ class DataListToolbarComponent extends React.Component<IOwnProps, IStateProps> {
     this.setState({
       chipGroups: chipArray
     });
+  };
+  deleteItem = id => {
+    const copyOfChipGroups = this.state.chipGroups;
+    for (let i = 0; copyOfChipGroups.length > i; i++) {
+      const index = copyOfChipGroups[i].chips.indexOf(id);
+      if (index !== -1) {
+        copyOfChipGroups[i].chips.splice(index, 1);
+        // check if this is the last item in the group category
+        if (copyOfChipGroups[i].chips.length === 0) {
+          copyOfChipGroups.splice(i, 1);
+          this.setState({ chipGroups: copyOfChipGroups });
+        } else {
+          this.setState({ chipGroups: copyOfChipGroups });
+        }
+      }
+      this.props.filterClick();
+      this.props.removeCheck(id);
+    }
   };
 
   render() {
@@ -133,7 +152,9 @@ class DataListToolbarComponent extends React.Component<IOwnProps, IStateProps> {
                 {this.state.chipGroups.map(currentGroup => (
                   <ChipGroupToolbarItem key={currentGroup.category} categoryName={currentGroup.category}>
                     {currentGroup.chips.map(chip => (
-                      <Chip key={chip}>{chip}</Chip>
+                      <Chip key={chip} onClick={() => this.deleteItem(chip)}>
+                        {chip}
+                      </Chip>
                     ))}
                   </ChipGroupToolbarItem>
                 ))}
