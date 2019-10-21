@@ -6,51 +6,20 @@ import HeaderComponent from '../PageHeaderComponent/HeaderComponent';
 import DataListComponent from '../ListDetailComponent/DataListComponent/DataListComponent';
 import InstanceDetailComponent from '../InstanceDetailsComponent/InstanceDetailComponent';
 
-{
-  /* The below code is to be removed in future */
-}
-// import BreadcrumbComponent from '../PageBreadcrumbComponent/BreadcrumbComponent';
-// import TabComponent from '../TestComponents/TabComponent/TabComponent';
-// import InstanceDetailPage from '../InstanceDetails/InstanceDetailComponent';
-// import Navbar from '../NavComponent/NavComponent';
-// import Overview from '../OverviewComponent/OverviewComponent';
+interface IOwnProps {}
 
-export interface IOwnProps {}
-export interface IStateProps {}
+const Dashboard: React.FC<IOwnProps> = () => {
+  const pageId = 'main-content-page-layout-default-nav';
+  const PageSkipToContent = <SkipToContent href={`#${pageId}`}>Skip to Content</SkipToContent>;
 
-class Dashboard extends React.Component<IOwnProps, IStateProps> {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    const pageId = 'main-content-page-layout-default-nav';
-    const PageSkipToContent = <SkipToContent href={`#${pageId}`}>Skip to Content</SkipToContent>;
-
-    return (
-      <React.Fragment>
-        <Page header={<HeaderComponent />} skipToContent={PageSkipToContent} mainContainerId={pageId} className="page">
-          <Route exact path="/instanceDetail/:processInstanceID" component={InstanceDetailComponent} />
-          <Route exact path="/" component={DataListComponent} />
-        </Page>
-        {/* The below code is to be removed in future */}
-        {/* <Page
-          header={<HeaderComponent />}
-          sidebar={<PageSidebar nav={<Navbar />} />}
-          isManagedSidebar
-          skipToContent={PageSkipToContent}
-          breadcrumb={<BreadcrumbComponent />}
-          mainContainerId={pageId}
-          className="page"
-        >
-          <Route exact path="/instanceDetail/:processInstanceID" component={InstanceDetailPage} />
-          <Route exact path="/" component={Overview} />
-        </Page> */}
-        {/* <InstanceDetailComponent /> */}
-      </React.Fragment>
-    );
-  }
-}
+  return (
+    <React.Fragment>
+      <Page header={<HeaderComponent />} skipToContent={PageSkipToContent} mainContainerId={pageId} className="page">
+        <Route exact path="/instanceDetail/:processInstanceID" component={InstanceDetailComponent} />
+        <Route exact path="/" component={DataListComponent} />
+      </Page>
+    </React.Fragment>
+  );
+};
 
 export default Dashboard;

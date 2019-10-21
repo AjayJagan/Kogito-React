@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Dropdown,
   DropdownToggle,
@@ -24,45 +24,68 @@ export interface IOwnProps {
   filterClick: any;
   removeCheck: any;
 }
-export interface IStateProps {
-  chipGroups: any;
-  isOpen: boolean;
-  checkedArray: Array<string>;
-}
 
-class DataListToolbarComponent extends React.Component<IOwnProps, IStateProps> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      chipGroups: [],
-      isOpen: false,
-      checkedArray: []
-    };
-  }
-  onToggle = isOpen => {
-    this.setState({
-      isOpen
-    });
+const DataListToolbarComponent: React.FC<IOwnProps> = ({
+  isActive,
+  isComplete,
+  handleChange,
+  checkedArray,
+  filterClick,
+  removeCheck
+}) => {
+  const [chipGroups, setchipGroups] = useState([]);
+  const [isOpen, setisOpen] = useState(false);
+
+  const dropDownList = [
+    <DropdownItem key="link1" component="checkbox">
+      <Checkbox
+        label="  ACTIVE"
+        aria-label="controlled checkbox example"
+        id="check-1"
+        name="isActiveChecked"
+        onChange={handleChange}
+        isChecked={isActive}
+      />
+    </DropdownItem>,
+    <DropdownItem key="link2">
+      <Checkbox
+        label="COMPLETED"
+        aria-label="controlled checkbox example"
+        id="check-2"
+        name="isCompletedChecked"
+        onChange={handleChange}
+        isChecked={isComplete}
+      />
+    </DropdownItem>,
+    <DropdownItem key="link3">
+      <Checkbox label="ERROR" aria-label="controlled checkbox example" id="check-3" name="check3" />
+    </DropdownItem>,
+    <DropdownItem key="link4">
+      <Checkbox label="ABORTED" aria-label="controlled checkbox example" id="check-4" name="check4" />
+    </DropdownItem>,
+    <DropdownItem key="link5">
+      <Checkbox label="SUSPENDED" aria-label="controlled checkbox example" id="check-5" name="check5" />
+    </DropdownItem>
+  ];
+
+  const onToggle = isOpen => {
+    setisOpen(isOpen);
   };
-  onSelect = event => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
+  const onSelect = event => {
+    setisOpen(isOpen ? false : true);
   };
-  onFilterClick = () => {
-    this.props.filterClick();
-    let chipArray = this.state.chipGroups;
+  const onFilterClick = () => {
+    filterClick();
+    let chipArray = chipGroups.slice();
     chipArray = [];
     chipArray.push({
       category: 'Status',
-      chips: this.props.checkedArray
+      chips: checkedArray
     });
-    this.setState({
-      chipGroups: chipArray
-    });
+    setchipGroups(chipArray);
   };
-  deleteItem = id => {
-    const copyOfChipGroups = this.state.chipGroups;
+  const deleteItem = id => {
+    const copyOfChipGroups = chipGroups.slice();
     for (let i = 0; copyOfChipGroups.length > i; i++) {
       const index = copyOfChipGroups[i].chips.indexOf(id);
       if (index !== -1) {
@@ -70,101 +93,68 @@ class DataListToolbarComponent extends React.Component<IOwnProps, IStateProps> {
         // check if this is the last item in the group category
         if (copyOfChipGroups[i].chips.length === 0) {
           copyOfChipGroups.splice(i, 1);
-          this.setState({ chipGroups: copyOfChipGroups });
+          setchipGroups(copyOfChipGroups);
         } else {
-          this.setState({ chipGroups: copyOfChipGroups });
+          setchipGroups(copyOfChipGroups);
         }
       }
-      this.props.filterClick();
-      this.props.removeCheck(id);
+      filterClick();
+      removeCheck(id);
     }
   };
 
-  render() {
-    const dropDownList = [
-      <DropdownItem key="link1" component="checkbox">
-        <Checkbox
-          label="  ACTIVE"
-          aria-label="controlled checkbox example"
-          id="check-1"
-          name="isActiveChecked"
-          onChange={this.props.handleChange}
-          isChecked={this.props.isActive}
-        />
-      </DropdownItem>,
-      <DropdownItem key="link2">
-        <Checkbox
-          label="COMPLETED"
-          aria-label="controlled checkbox example"
-          id="check-2"
-          name="isCompletedChecked"
-          onChange={this.props.handleChange}
-          isChecked={this.props.isComplete}
-        />
-      </DropdownItem>,
-      <DropdownItem key="link3">
-        <Checkbox label="ERROR" aria-label="controlled checkbox example" id="check-3" name="check3" />
-      </DropdownItem>,
-      <DropdownItem key="link4">
-        <Checkbox label="ABORTED" aria-label="controlled checkbox example" id="check-4" name="check4" />
-      </DropdownItem>,
-      <DropdownItem key="link5">
-        <Checkbox label="SUSPENDED" aria-label="controlled checkbox example" id="check-5" name="check5" />
-      </DropdownItem>
-    ];
-    return (
-      <React.Fragment>
-        <Toolbar className="pf-u-justify-content-space-between pf-u-mx-xl pf-u-my-md">
-          <ToolbarGroup>
-            <ToolbarItem>
-              <Dropdown
-                toggle={
-                  <DropdownToggle
-                    splitButtonItems={[
-                      <DropdownToggleCheckbox id="example-checkbox-1" key="split-checkbox" aria-label="Select all" />
-                    ]}
-                  />
-                }
-              />
-            </ToolbarItem>
-          </ToolbarGroup>
-          <ToolbarGroup>
-            <ToolbarItem>
-              <Dropdown
-                toggle={
-                  <DropdownToggle onToggle={this.onToggle}>
-                    <FilterIcon /> &nbsp;&nbsp; Dropdown
-                  </DropdownToggle>
-                }
-                isOpen={this.state.isOpen}
-                dropdownItems={dropDownList}
-              />
-            </ToolbarItem>
-            <ToolbarItem>
-              <Button variant="primary" onClick={this.onFilterClick}>
-                Apply Filter
-              </Button>
-            </ToolbarItem>
-          </ToolbarGroup>
-          <ToolbarGroup>
-            <ToolbarItem>
-              <ChipGroup withToolbar>
-                {this.state.chipGroups.map(currentGroup => (
-                  <ChipGroupToolbarItem key={currentGroup.category} categoryName={currentGroup.category}>
-                    {currentGroup.chips.map(chip => (
-                      <Chip key={chip} onClick={() => this.deleteItem(chip)}>
-                        {chip}
-                      </Chip>
-                    ))}
-                  </ChipGroupToolbarItem>
-                ))}
-              </ChipGroup>
-            </ToolbarItem>
-          </ToolbarGroup>
-        </Toolbar>
-      </React.Fragment>
-    );
-  }
-}
+  return (
+    <React.Fragment>
+      <Toolbar className="pf-u-justify-content-space-between pf-u-mx-xl pf-u-my-md">
+        <ToolbarGroup>
+          <ToolbarItem>
+            <Dropdown
+              toggle={
+                <DropdownToggle
+                  splitButtonItems={[
+                    <DropdownToggleCheckbox id="example-checkbox-1" key="split-checkbox" aria-label="Select all" />
+                  ]}
+                />
+              }
+            />
+          </ToolbarItem>
+        </ToolbarGroup>
+        <ToolbarGroup>
+          <ToolbarItem>
+            <Dropdown
+              toggle={
+                <DropdownToggle onToggle={onToggle}>
+                  <FilterIcon /> &nbsp;&nbsp; Dropdown
+                </DropdownToggle>
+              }
+              isOpen={isOpen}
+              dropdownItems={dropDownList}
+            />
+          </ToolbarItem>
+          <ToolbarItem>
+            <Button variant="primary" onClick={onFilterClick}>
+              Apply Filter
+            </Button>
+          </ToolbarItem>
+        </ToolbarGroup>
+        <ToolbarGroup>
+          <ToolbarItem>
+            <ChipGroup withToolbar>
+              {chipGroups.map(currentGroup => (
+                <ChipGroupToolbarItem key={currentGroup.category} categoryName={currentGroup.category}>
+                  {currentGroup.chips.map(chip => (
+                    <Chip key={chip} onClick={() => deleteItem(chip)}>
+                      {chip}
+                    </Chip>
+                  ))}
+                </ChipGroupToolbarItem>
+              ))}
+            </ChipGroup>
+          </ToolbarItem>
+        </ToolbarGroup>
+      </Toolbar>
+    </React.Fragment>
+  );
+};
 
 export default DataListToolbarComponent;

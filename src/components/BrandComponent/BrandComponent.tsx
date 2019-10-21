@@ -4,23 +4,14 @@ import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 
 type combinedProps = RouteComponentProps & IOwnProps;
-export interface IOwnProps {}
-export interface IStateProps {}
+interface IOwnProps {}
 
-const logo = require('../../static/kogito_logo_rgb.png');
-
-class BrandComponent extends React.Component<combinedProps, IStateProps> {
-  constructor(props: combinedProps) {
-    super(props);
-    this.state = {};
-  }
-
-  onLogoClick = () => {
-    this.props.history.push('/');
+const BrandComponent: React.FC<combinedProps> = ({ history }) => {
+  const logo = require('../../static/kogito_logo_rgb.png');
+  const onLogoClick = () => {
+    history.push('/');
   };
-  render() {
-    return <Brand src={logo} alt="Kogito Logo" onClick={this.onLogoClick}></Brand>;
-  }
-}
+  return <Brand src={logo} alt="Kogito Logo" onClick={onLogoClick}></Brand>;
+};
 
 export default withRouter(BrandComponent);
