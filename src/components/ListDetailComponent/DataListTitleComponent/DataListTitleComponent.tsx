@@ -20,7 +20,7 @@ const DataListTitleComponent: React.FC<IOwnProps> = () => {
       >
         Instances
       </Title>
-      <TextContent style={{ width: '100%' }}>
+      <TextContent>
         <Text
           component={TextVariants.p}
           style={{ backgroundColor: 'white', marginTop: '-13px', paddingLeft: '55px', paddingBottom: '29px' }}
