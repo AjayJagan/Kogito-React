@@ -15,7 +15,6 @@ const ProcessDetailsProcessVariables = ({ loading, data }) => {
                 <div key={index}>
                   <ReactJson src={JSON.parse(item.variables)}></ReactJson>
                   <br />
-                  {/* <JSONViewer json={JSON.parse(item.variables)} /> */}
                 </div>
               );
             })

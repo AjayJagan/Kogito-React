@@ -15,7 +15,6 @@ const Dashboard: React.FC<IOwnProps> = () => {
   return (
     <React.Fragment>
       <Page header={<HeaderComponent />} skipToContent={PageSkipToContent} mainContainerId={pageId} className="page">
-        {/* <Route exact path="/instanceDetail/:processInstanceID" component={InstanceDetailComponent} /> */}
         <Route exact path="/" component={DataListComponent} />
         <Route exact path="/Details/:instanceID" component={ProcesssDetailsPage} />
       </Page>
