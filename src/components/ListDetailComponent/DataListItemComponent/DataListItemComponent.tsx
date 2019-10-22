@@ -47,7 +47,6 @@ const DataListItemComponent: React.FC<IOwnProps> = ({ id, instanceID, instanceSt
   const onSelect = event => {
     setisOpen(isOpen ? false : true);
   };
-  console.log(childList);
   const onCheckBoxClick = () => {
     setisChecked(isChecked ? false : true);
   };

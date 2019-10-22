@@ -10,7 +10,7 @@ const ProcessDetailsTimeline = ({ loading, data }) => {
     overflowY: 'scroll',
     marginTop: '3em'
   };
-  
+  console.log('date', new Date("2019-10-22T04:43:01.146Z"))
   return (
     <Card style={TimelineStyle}>
       <CardHeader>Timeline</CardHeader>
