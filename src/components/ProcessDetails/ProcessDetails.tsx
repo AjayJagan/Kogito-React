@@ -17,7 +17,7 @@ import {
 const ProcessDetails = ({ loading, data }) => {
   const DetailsStyle = {
     marginLeft: '2em',
-    height: '31em'
+    height: '25em'
   };
   return (
     <Card style={DetailsStyle}>

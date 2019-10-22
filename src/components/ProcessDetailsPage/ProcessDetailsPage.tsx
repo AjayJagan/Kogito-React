@@ -34,8 +34,7 @@ const ProcessDetailsPage = ({ match }) => {
   const { data, loading, error } = useQuery(GET_QUERY, {
     variables: { id }
   });
-  console.log('Sara', data);
-  // console.log('nodes', data.ProcessId.nodes);
+  
   const PageSectionstyle = {
     height: '100%'
   };
