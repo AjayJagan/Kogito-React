@@ -24,7 +24,6 @@ import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { withApollo } from 'react-apollo';
 import { useQuery } from '@apollo/react-hooks';
-// import query from './fetchQuery';
 
 export interface IOwnProps {
   id: number;

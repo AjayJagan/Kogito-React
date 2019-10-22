@@ -27,6 +27,9 @@
     "apollo-boost": "^0.4.4",
     "graphql": "^14.5.8",
     "react-apollo": "^3.1.3",
+    "react-event-timeline": "^1.6.3",
+    "react-json-view": "^1.19.1",
+    "react-json-viewer": "^2.1.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scrollbar": "^0.5.6"
@@ -78,8 +81,8 @@
   },
   "jest": {
     "setupFiles": [
-      "<rootDir>/test-shim.js",
-      "<rootDir>/test-setup.js"
+      "<rootDir>/config/Jest-config/test-shim.js",
+      "<rootDir>/config/Jest-config/test-setup.js"
     ],
     "moduleFileExtensions": [
       "ts",
@@ -87,13 +90,14 @@
       "js"
     ],
     "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/test-preprocessor.js",
+      "^.+\\.(ts|tsx)$": "<rootDir>/config/Jest-config/test-preprocessor.js",
       "\\.(ts|tsx)$": "<rootDir>/node_modules/babel-jest"
     },
     "testMatch": [
       "**/tests/*.(ts|tsx|js)"
     ],
     "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|svg)$": "<rootDir>/fileMock.js",
       "\\.(scss|sass|css)$": "identity-obj-proxy"
     }
   }
