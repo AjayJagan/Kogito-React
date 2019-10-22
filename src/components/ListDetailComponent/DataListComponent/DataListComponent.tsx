@@ -14,6 +14,7 @@ export interface IOwnProps {}
 const DataListComponent: React.FC<IOwnProps> = () => {
   const [isActiveChecked, setIsActiveChecked] = useState<boolean>(false);
   const [isCompletedChecked, setIsCompletedChecked] = useState<boolean>(false);
+  const [isAbortChecked, setisAbortChecked] = useState<boolean>(false);
   const [initData, setInitData] = useState<any>([]);
   const [checkedArray, setCheckedArray] = useState<any>([]);
   const [filterArray, setFilterArray] = useState<any>([]);
@@ -65,6 +66,19 @@ const DataListComponent: React.FC<IOwnProps> = () => {
         setCheckedArray(tempArr);
       }
     }
+    if (event.target.name == 'isAbortChecked') {
+      setisAbortChecked(isAbortChecked ? false : true);
+      if (!isAbortChecked == true) {
+        setCheckedArray([...checkedArray, 'ABORTED']);
+      } else if (!isAbortChecked == false) {
+        let tempArr = checkedArray.slice();
+        let temp = 'ABORTED';
+        _.remove(tempArr, function(temp) {
+          return temp == 'ABORTED';
+        });
+        setCheckedArray(tempArr);
+      }
+    }
   };
 
   const onFilterClick = () => {
@@ -85,6 +99,8 @@ const DataListComponent: React.FC<IOwnProps> = () => {
       setIsActiveChecked(false);
     } else if (id.toString().toLowerCase() == 'completed') {
       setIsCompletedChecked(false);
+    } else if (id.toString().toLowerCase() === 'aborted') {
+      setisAbortChecked(false);
     }
   };
 
@@ -99,6 +115,7 @@ const DataListComponent: React.FC<IOwnProps> = () => {
           <DataListToolbarComponent
             isActive={isActiveChecked}
             isComplete={isCompletedChecked}
+            isAborted={isAbortChecked}
             handleChange={handleChange}
             checkedArray={checkedArray}
             filterClick={onFilterClick}

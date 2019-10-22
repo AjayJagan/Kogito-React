@@ -9,11 +9,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
   DropdownItem,
-  DropdownSeparator,
-  AboutModal,
-  TextContent,
-  TextList,
-  TextListItem
+  DropdownSeparator
 } from '@patternfly/react-core';
 import accessibleStyles from '@patternfly/react-styles/css/utilities/Accessibility/accessibility';
 import { css } from '@patternfly/react-styles';

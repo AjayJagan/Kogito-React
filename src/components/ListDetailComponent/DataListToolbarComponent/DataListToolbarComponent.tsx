@@ -19,6 +19,7 @@ import _ from 'lodash';
 export interface IOwnProps {
   isComplete: boolean;
   isActive: boolean;
+  isAborted: boolean;
   checkedArray: any;
   handleChange: any;
   filterClick: any;
@@ -28,6 +29,7 @@ export interface IOwnProps {
 const DataListToolbarComponent: React.FC<IOwnProps> = ({
   isActive,
   isComplete,
+  isAborted,
   handleChange,
   checkedArray,
   filterClick,
@@ -58,10 +60,17 @@ const DataListToolbarComponent: React.FC<IOwnProps> = ({
       />
     </DropdownItem>,
     <DropdownItem key="link3">
-      <Checkbox label="ERROR" aria-label="controlled checkbox example" id="check-3" name="check3" />
+      <Checkbox label="ERROR" aria-label="controlled checkbox example" id="check-3" name="isErrorChecked" />
     </DropdownItem>,
     <DropdownItem key="link4">
-      <Checkbox label="ABORTED" aria-label="controlled checkbox example" id="check-4" name="check4" />
+      <Checkbox
+        label="ABORTED"
+        aria-label="controlled checkbox example"
+        id="check-4"
+        name="isAbortChecked"
+        onChange={handleChange}
+        isChecked={isAborted}
+      />
     </DropdownItem>,
     <DropdownItem key="link5">
       <Checkbox label="SUSPENDED" aria-label="controlled checkbox example" id="check-5" name="check5" />
