@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AboutModal, Button, TextContent, TextList, TextListItem } from '@patternfly/react-core';
 import './AboutModal.css';
 export interface IOwnProps {

@@ -6,14 +6,13 @@ export interface IOwnProps {
   cardDetails: any;
 }
 export interface IStateProps {}
-export default class CardComponent extends React.Component<IOwnProps, IStateProps> {
-  render() {
-    if (this.props.cardDetails.Header == 'Active Task') {
+const CardComponent:React.FunctionComponent<IOwnProps> = (props) => {
+    if (  props.cardDetails.Header == 'Active Task') {
       return (
         <Card>
           <CardHeader>
             <TextContent>
-              <Text component={TextVariants.h6}>{this.props.cardDetails['Header']}</Text>
+              <Text component={TextVariants.h6}>{  props.cardDetails['Header']}</Text>
             </TextContent>
           </CardHeader>
           <hr className="pf-c-divider"></hr>
@@ -57,7 +56,7 @@ export default class CardComponent extends React.Component<IOwnProps, IStateProp
           </CardBody>
         </Card>
       );
-    } else if (this.props.cardDetails.Header == 'Documents') {
+    } else if (  props.cardDetails.Header == 'Documents') {
       return (
         <Card>
           <CardHeader>
@@ -88,12 +87,12 @@ export default class CardComponent extends React.Component<IOwnProps, IStateProp
           </CardBody>
         </Card>
       );
-    } else if (this.props.cardDetails.Header1 == 'Active Task') {
+    } else if (  props.cardDetails.Header1 == 'Active Task') {
       return (
         <Card>
           <CardHeader>
             <TextContent>
-              <Text component={TextVariants.h6}>{this.props.cardDetails['Header1']}</Text>
+              <Text component={TextVariants.h6}>{  props.cardDetails['Header1']}</Text>
             </TextContent>
           </CardHeader>
           <hr className="pf-c-divider"></hr>
@@ -102,7 +101,7 @@ export default class CardComponent extends React.Component<IOwnProps, IStateProp
               <Text component={TextVariants.small}>Task Name</Text>
             </TextContent>
             <TextContent>
-              <Text component={TextVariants.p}>{this.props.cardDetails['Task Name']}</Text>
+              <Text component={TextVariants.p}>{  props.cardDetails['Task Name']}</Text>
             </TextContent>
           </CardBody>
           <CardBody>
@@ -110,7 +109,7 @@ export default class CardComponent extends React.Component<IOwnProps, IStateProp
               <Text component={TextVariants.small}>Started</Text>
             </TextContent>
             <TextContent>
-              <Text component={TextVariants.p}>{this.props.cardDetails['Started']}</Text>
+              <Text component={TextVariants.p}>{  props.cardDetails['Started']}</Text>
             </TextContent>
           </CardBody>
           <CardBody>
@@ -118,11 +117,12 @@ export default class CardComponent extends React.Component<IOwnProps, IStateProp
               <Text component={TextVariants.small}>Asignee</Text>
             </TextContent>
             <TextContent>
-              <Text component={TextVariants.p}>{this.props.cardDetails['Asignee']}</Text>
+              <Text component={TextVariants.p}>{  props.cardDetails['Asignee']}</Text>
             </TextContent>
           </CardBody>
         </Card>
       );
     }
-  }
 }
+
+export default CardComponent;

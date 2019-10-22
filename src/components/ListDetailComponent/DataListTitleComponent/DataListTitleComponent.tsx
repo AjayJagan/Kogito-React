@@ -1,6 +1,5 @@
 import React from 'react';
 import { Title, TextContent, Text, TextVariants } from '@patternfly/react-core';
-import './DataListTitleComponent.css';
 
 export interface IOwnProps {}
 

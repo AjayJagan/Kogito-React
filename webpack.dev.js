@@ -2,12 +2,13 @@ const path = require('path');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
-const HOST = '0.0.0.0';
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || '9000';
 
 module.exports = merge(common, {
   mode: 'development',
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   devServer: {
     contentBase: './dist',
     host: HOST,
@@ -19,6 +20,7 @@ module.exports = merge(common, {
     overlay: true,
     open: true
   },
+  plugins: [new BundleAnalyzerPlugin()],
   module: {
     rules: [
       {
