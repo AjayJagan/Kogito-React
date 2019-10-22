@@ -5,6 +5,3 @@
 .pf-c-login {
   --pf-global--BackgroundColor--dark-transparent-200: var(--login-background-Color);
 }
-.pf-c-button.pf-m-primary {
-  --pf-c-button--m-primary--BackgroundColor: var(--login-button-Color);
-}

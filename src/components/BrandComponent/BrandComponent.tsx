@@ -1,14 +1,17 @@
 import React from 'react';
 import { Brand } from '@patternfly/react-core';
-export interface IOwnProps {}
-export interface IStateProps {}
-const logo = require('../../static/kogito_logo_rgb.png');
-export default class BrandComponent extends React.Component<IOwnProps, IStateProps> {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    return <Brand src={logo} alt="Kogito Logo"></Brand>;
-  }
-}
+import { withRouter } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router';
+
+type combinedProps = RouteComponentProps & IOwnProps;
+interface IOwnProps {}
+
+const BrandComponent: React.FC<combinedProps> = ({ history }) => {
+  const logo = require('../../static/kogito_logo_rgb.png');
+  const onLogoClick = () => {
+    history.push('/');
+  };
+  return <Brand src={logo} alt="Kogito Logo" onClick={onLogoClick}></Brand>;
+};
+
+export default withRouter(BrandComponent);

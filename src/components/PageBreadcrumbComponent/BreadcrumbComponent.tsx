@@ -1,22 +1,19 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem } from '@patternfly/react-core';
+import { RouteComponentProps } from 'react-router';
+
 export interface IOwnProps {}
 export interface IStateProps {}
-export default class BreadcrumbComponent extends React.Component<IOwnProps, IStateProps> {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    return (
-      <Breadcrumb>
-        <BreadcrumbItem>Section Home</BreadcrumbItem>
-        <BreadcrumbItem to="#">Section Title</BreadcrumbItem>
-        <BreadcrumbItem to="#">Section Title</BreadcrumbItem>
-        <BreadcrumbItem to="#" isActive>
-          Section Landing
-        </BreadcrumbItem>
-      </Breadcrumb>
-    );
-  }
-}
+const BreadcrumbComponent: React.FunctionComponent<IOwnProps> = () => {
+  return (
+    <Breadcrumb>
+      <BreadcrumbItem to="#">Dashboard</BreadcrumbItem>
+      <BreadcrumbItem to="#">Instances</BreadcrumbItem>
+      <BreadcrumbItem to="#" isActive>
+        Instance
+      </BreadcrumbItem>
+    </Breadcrumb>
+  );
+};
+
+export default BreadcrumbComponent;
