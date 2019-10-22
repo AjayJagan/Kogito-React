@@ -14,12 +14,13 @@ const DataListTitleComponent: React.FC<IOwnProps> = () => {
           paddingTop: '21px',
           paddingLeft: '53px',
           paddingBottom: '15px',
-          fontWeight: 500
+          fontWeight: 500,
+          width: '100%'
         }}
       >
         Instances
       </Title>
-      <TextContent>
+      <TextContent style={{ width: '100%' }}>
         <Text
           component={TextVariants.p}
           style={{ backgroundColor: 'white', marginTop: '-13px', paddingLeft: '55px', paddingBottom: '29px' }}

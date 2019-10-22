@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import './Dashboard.css';
 import HeaderComponent from '../PageHeaderComponent/HeaderComponent';
 import DataListComponent from '../ListDetailComponent/DataListComponent/DataListComponent';
-import InstanceDetailComponent from '../InstanceDetailsComponent/InstanceDetailComponent';
+import ProcesssDetailsPage from '../ProcessDetailsPage/ProcessDetailsPage';
 
 interface IOwnProps {}
 
@@ -15,8 +15,9 @@ const Dashboard: React.FC<IOwnProps> = () => {
   return (
     <React.Fragment>
       <Page header={<HeaderComponent />} skipToContent={PageSkipToContent} mainContainerId={pageId} className="page">
-        <Route exact path="/instanceDetail/:processInstanceID" component={InstanceDetailComponent} />
+        {/* <Route exact path="/instanceDetail/:processInstanceID" component={InstanceDetailComponent} /> */}
         <Route exact path="/" component={DataListComponent} />
+        <Route exact path="/Details/:instanceID" component={ProcesssDetailsPage} />
       </Page>
     </React.Fragment>
   );

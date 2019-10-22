@@ -109,7 +109,7 @@ const DataListItemComponent: React.FC<IOwnProps> = ({ id, instanceID, instanceSt
             id="kie-datalist-action"
             aria-label="Actions"
           >
-            <Link to={'/instanceDetail/' + id}>
+            <Link to={'/Details/' + instanceID}>
               <Button variant="secondary">Details</Button>
             </Link>
           </DataListAction>
