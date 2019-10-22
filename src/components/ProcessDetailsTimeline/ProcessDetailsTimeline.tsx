@@ -1,5 +1,9 @@
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter, Button } from '@patternfly/react-core';
+import { TimeAgo } from '@n1ru4l/react-time-ago';
+import { UserIcon } from '@patternfly/react-icons'
+import { ServicesIcon } from '@patternfly/react-icons'
+
 
 const ProcessDetailsTimeline = ({ loading, data }) => {
   const TimelineStyle = {
@@ -10,7 +14,12 @@ const ProcessDetailsTimeline = ({ loading, data }) => {
     overflowY: 'scroll',
     marginTop: '3em'
   };
-  console.log('date', new Date("2019-10-22T04:43:01.146Z"))
+  
+  const IconStyle = {
+    position: 'relative',
+    top: '3px',
+    left: '3px'
+  }
   return (
     <Card style={TimelineStyle}>
       <CardHeader>Timeline</CardHeader>
@@ -21,9 +30,9 @@ const ProcessDetailsTimeline = ({ loading, data }) => {
               return (
                 <div className="timeline-item" key={index}>
                   <div className="timeline-item-content">
-                    {/* <time>{content.date}</time> */}
+                      <TimeAgo date={new Date(`${content.exit}`)} render={({ error, value }) => <span>{value}</span>}/>
                     <p>{content.name}</p>
-                    <span className="circle" />
+                    <span className="circle">{content.type === 'HumanTaskNode' ? <UserIcon style={IconStyle}/> : <ServicesIcon style={IconStyle}/> }  </span>
                   </div>
                 </div>
               );
